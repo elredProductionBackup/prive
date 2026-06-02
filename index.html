@@ -151,207 +151,201 @@
 
     <script>
 
-        /*
-        ==========================================
-        CONFIG
-        ==========================================
-        */
+    /*
+    ==========================================
+    CONFIG
+    ==========================================
+    */
 
-        const ACCESS_CODES = [
-            "saurabh",
-        ];
+    const ACCESS_CODES = [
+        "saurabh",
+    ];
 
-        // CHANGE THIS
-        // your actual protected framer page
-        const REDIRECT_URL = "/home/";
-
-
-
-        /*
-        ==========================================
-        AUTO LOGIN
-        ==========================================
-        */
-
-        if (localStorage.getItem("prive_access") === "granted") {
-            window.location.href = REDIRECT_URL;
-        }
+    // your protected page
+    const REDIRECT_URL = "./home/";
 
 
 
-        /*
-        ==========================================
-        ELEMENTS
-        ==========================================
-        */
+    /*
+    ==========================================
+    ELEMENTS
+    ==========================================
+    */
 
-        const modal = document.getElementById('accessModal');
-        const openBtn = document.getElementById('openModalBtn');
-        const closeBtn = document.getElementById('closeModalBtn');
-        const backdrop = document.getElementById('modalBackdrop');
-        const modalContent = document.getElementById('modalContent');
-        const accessForm = document.getElementById('accessForm');
+    const modal = document.getElementById('accessModal');
+    const openBtn = document.getElementById('openModalBtn');
+    const closeBtn = document.getElementById('closeModalBtn');
+    const backdrop = document.getElementById('modalBackdrop');
+    const modalContent = document.getElementById('modalContent');
+    const accessForm = document.getElementById('accessForm');
 
-        const input = document.getElementById('secretInput');
-        const errorText = document.getElementById('errorText');
-
-
-        /*
-        ==========================================
-        MODAL FUNCTIONS
-        ==========================================
-        */
-
-        function openModal() {
-            modal.classList.remove('hidden');
-
-            void modal.offsetWidth;
-
-            modal.classList.remove('opacity-0');
-
-            modalContent.classList.remove('scale-95');
-            modalContent.classList.add('scale-100');
-
-            setTimeout(() => {
-                input.focus();
-            }, 100);
-        }
-
-        function closeModal() {
-
-            modal.classList.add('opacity-0');
-
-            modalContent.classList.remove('scale-100');
-            modalContent.classList.add('scale-95');
-
-            setTimeout(() => {
-
-                modal.classList.add('hidden');
-
-                accessForm.reset();
-
-                input.classList.remove('border-red-400', 'text-red-500');
-
-                errorText.classList.add('hidden');
-
-            }, 300);
-        }
+    const input = document.getElementById('secretInput');
+    const errorText = document.getElementById('errorText');
 
 
 
-        /*
-        ==========================================
-        EVENTS
-        ==========================================
-        */
+    /*
+    ==========================================
+    MODAL FUNCTIONS
+    ==========================================
+    */
 
-        openBtn.addEventListener('click', openModal);
+    function openModal() {
 
-        closeBtn.addEventListener('click', closeModal);
+        modal.classList.remove('hidden');
 
-        backdrop.addEventListener('click', closeModal);
+        void modal.offsetWidth;
 
-        openBtn.addEventListener('keydown', (e) => {
+        modal.classList.remove('opacity-0');
 
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                openModal();
-            }
-        });
+        modalContent.classList.remove('scale-95');
+        modalContent.classList.add('scale-100');
 
-        document.addEventListener('keydown', (e) => {
+        setTimeout(() => {
+            input.focus();
+        }, 100);
+    }
 
-            if (
-                e.key === 'Escape' &&
-                !modal.classList.contains('hidden')
-            ) {
-                closeModal();
-            }
-        });
+    function closeModal() {
+
+        modal.classList.add('opacity-0');
+
+        modalContent.classList.remove('scale-100');
+        modalContent.classList.add('scale-95');
+
+        setTimeout(() => {
+
+            modal.classList.add('hidden');
+
+            accessForm.reset();
+
+            input.classList.remove(
+                'border-red-400',
+                'text-red-500'
+            );
+
+            errorText.classList.add('hidden');
+
+        }, 300);
+    }
 
 
 
-        /*
-        ==========================================
-        AUTH LOGIC
-        ==========================================
-        */
+    /*
+    ==========================================
+    EVENTS
+    ==========================================
+    */
 
-        accessForm.addEventListener('submit', (e) => {
+    openBtn.addEventListener('click', openModal);
+
+    closeBtn.addEventListener('click', closeModal);
+
+    backdrop.addEventListener('click', closeModal);
+
+    openBtn.addEventListener('keydown', (e) => {
+
+        if (e.key === 'Enter' || e.key === ' ') {
 
             e.preventDefault();
 
-            const btn = accessForm.querySelector('button');
+            openModal();
+        }
+    });
 
-            const originalText = btn.innerText;
+    document.addEventListener('keydown', (e) => {
 
-            btn.innerText = 'Verifying...';
+        if (
+            e.key === 'Escape' &&
+            !modal.classList.contains('hidden')
+        ) {
+            closeModal();
+        }
+    });
 
-            btn.classList.add('opacity-80', 'cursor-not-allowed');
 
-            const enteredCode = input.value.trim();
+
+    /*
+    ==========================================
+    AUTH LOGIC
+    ==========================================
+    */
+
+    accessForm.addEventListener('submit', (e) => {
+
+        e.preventDefault();
+
+        const btn = accessForm.querySelector('button');
+
+        const originalText = btn.innerText;
+
+        btn.innerText = 'Verifying...';
+
+        btn.classList.add(
+            'opacity-80',
+            'cursor-not-allowed'
+        );
+
+        const enteredCode = input.value
+            .trim()
+            .toLowerCase();
+
+        setTimeout(() => {
+
+            /*
+            SUCCESS
+            */
+
+            if (ACCESS_CODES.includes(enteredCode)) {
+
+                btn.innerText = 'Access Granted';
+
+                setTimeout(() => {
+
+                    window.location.href = REDIRECT_URL;
+
+                }, 500);
+
+                return;
+            }
+
+
+
+            /*
+            ERROR
+            */
+
+            btn.innerText = originalText;
+
+            btn.classList.remove(
+                'opacity-80',
+                'cursor-not-allowed'
+            );
+
+            input.classList.add(
+                'border-red-400',
+                'text-red-500'
+            );
+
+            errorText.classList.remove('hidden');
 
             setTimeout(() => {
 
-                /*
-                SUCCESS
-                */
-
-                if (ACCESS_CODES.includes(enteredCode)) {
-
-                    // save access
-                    localStorage.setItem(
-                        "prive_access",
-                        "granted"
-                    );
-
-                    btn.innerText = 'Access Granted';
-
-                    // redirect
-                    setTimeout(() => {
-                        window.location.href = REDIRECT_URL;
-                    }, 500);
-
-                    return;
-                }
-
-
-
-                /*
-                ERROR
-                */
-
-                btn.innerText = originalText;
-
-                btn.classList.remove(
-                    'opacity-80',
-                    'cursor-not-allowed'
-                );
-
-                input.classList.add(
+                input.classList.remove(
                     'border-red-400',
                     'text-red-500'
                 );
 
-                errorText.classList.remove('hidden');
+                errorText.classList.add('hidden');
 
-                setTimeout(() => {
+                input.value = '';
 
-                    input.classList.remove(
-                        'border-red-400',
-                        'text-red-500'
-                    );
+            }, 1500);
 
-                    errorText.classList.add('hidden');
+        }, 800);
+    });
 
-                    input.value = '';
-
-                }, 1500);
-
-            }, 800);
-        });
-
-    </script>
+</script>
 
 </body>
 </html>
