@@ -142,10 +142,10 @@
 
                     <input
                         id="secretInput"
-                        type="password"
+                        type="text"
                         required
                         placeholder="Secret Code"
-                        class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:border-prive-gold focus:ring-1 focus:ring-prive-gold font-body text-center tracking-[0.2em] transition-colors"
+                        class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:border-prive-gold focus:ring-1 focus:ring-prive-gold font-body text-center tracking-[0.2em] uppercase transition-colors"
                     />
 
                     <p id="errorText"
@@ -174,8 +174,8 @@
     */
 
     const ACCESS_CODES = [
-        "saurabh",
-    ];
+    "saurabh",
+].map(code => code.toLowerCase());
 
     // your protected page
     const REDIRECT_URL = "./home/";
