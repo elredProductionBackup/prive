@@ -50,118 +50,171 @@
     </script>
 </head>
 
-<body class="bg-white min-h-screen flex flex-col items-center justify-center p-6 antialiased selection:bg-prive-gold selection:text-white">
+<body class="min-h-screen overflow-hidden bg-[#060606] text-white antialiased selection:bg-[#C9A227] selection:text-black">
 
-    <main class="max-w-[840px] w-full flex flex-col items-center text-center">
+    <!-- Background -->
+    <div class="absolute inset-0">
+        <img 
+            src="assets/images/BG.jpg"
+            class="w-full h-full object-cover opacity-[0.9]"
+            alt=""
+        />
 
-        <h1 class="font-logo font-bold text-prive-gold text-[42px] md:text-[54px] tracking-wide mb-8 md:mb-14">
+        <!-- Dark overlay -->
+        <div class="absolute inset-0 bg-black/70"></div>
+
+        <!-- Gradient -->
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(201,162,39,0.15),transparent_45%)]"></div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="relative z-10 min-h-screen flex flex-col items-center justify-center px-6 text-center">
+
+        <!-- Logo -->
+        <!-- <h1 class="font-logo font-semibold text-[#C9A227] text-[48px] md:text-[72px] tracking-wide mb-8">
             Privé
-        </h1>
+        </h1> -->
+        <img class="w-[150px] mb-[50px]" src="assets/logo/prive-logo.svg" alt="Prive Logo">
 
-        <h2 class="font-heading text-prive-dark text-[28px] md:text-[44px] leading-[1.3] md:leading-[1.25] mb-12 md:mb-20 px-2 md:px-0 mx-auto max-w-[760px]">
+        <!-- Heading -->
+        <h2 class="max-w-[920px] font-heading text-[34px] md:text-[62px] leading-[1.12] font-light text-[#F5F5F5]">
             An invitation-only gathering for UHNI operators and investors shaping what comes next.
         </h2>
 
-        <p class="font-body italic text-prive-text text-[15px] md:text-[18px] mb-8 md:mb-10">
+        <!-- Subtext -->
+        <p class="mt-8 text-[15px] md:text-[18px] italic text-white/55 tracking-wide">
             Participation is currently being extended on an invited basis.
         </p>
 
-        <div id="openModalBtn" role="button" tabindex="0" class="flex flex-col items-center cursor-pointer group">
-            <div class="w-14 h-14 md:w-16 md:h-16 rounded-full border border-prive-gold flex items-center justify-center mb-3 transition-colors duration-300 group-hover:bg-amber-50">
+        <!-- Access -->
+        <button
+            id="openModalBtn"
+            class="group mt-14 flex flex-col items-center"
+        >
 
-                <svg width="20" height="22" viewBox="0 0 24 24" fill="none"
+            <div class="w-[72px] h-[72px] rounded-full border border-[#C9A227]/40 bg-white/[0.03] backdrop-blur-xl flex items-center justify-center transition-all duration-300 group-hover:border-[#C9A227] group-hover:bg-[#C9A227]/10 group-hover:scale-105">
+
+                <svg
+                    width="22"
+                    height="22"
+                    viewBox="0 0 24 24"
+                    fill="none"
                     xmlns="http://www.w3.org/2000/svg"
-                    class="text-prive-gold w-5 h-5 md:w-6 md:h-6">
-
-                    <rect x="5" y="11" width="14" height="10" rx="2"
-                        stroke="currentColor"
-                        stroke-width="1.5" />
-
-                    <path d="M8 11V7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7V11"
+                    class="text-[#C9A227]"
+                >
+                    <rect
+                        x="5"
+                        y="11"
+                        width="14"
+                        height="10"
+                        rx="2"
                         stroke="currentColor"
                         stroke-width="1.5"
-                        stroke-linecap="round" />
+                    />
+
+                    <path
+                        d="M8 11V7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7V11"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                    />
 
                     <circle cx="12" cy="16" r="1.5" fill="currentColor" />
                 </svg>
             </div>
 
-            <span class="font-body text-prive-dark text-[15px] md:text-[16px] tracking-wide">
+            <span class="mt-4 uppercase tracking-[0.25em] text-[12px] text-white/70 group-hover:text-white transition-colors ">
                 Access
             </span>
-        </div>
+
+        </button>
 
     </main>
 
-    <!-- Access Modal -->
-    <div id="accessModal"
-        class="fixed inset-0 z-50 hidden opacity-0 transition-opacity duration-300"
-        aria-labelledby="modal-title"
-        role="dialog"
-        aria-modal="true">
+    <!-- Modal -->
+    <div
+        id="accessModal"
+        class="fixed inset-0 z-50 hidden opacity-0 transition duration-300"
+    >
 
-        <!-- Backdrop -->
-        <div id="modalBackdrop"
-            class="absolute inset-0 bg-black/40 backdrop-blur-sm cursor-pointer">
-        </div>
+        <!-- Overlay -->
+        <div
+            id="modalBackdrop"
+            class="absolute inset-0 bg-black/75"
+        ></div>
 
-        <!-- Modal -->
-        <div class="fixed inset-0 flex items-center justify-center p-4 pointer-events-none">
+        <!-- Modal Container -->
+        <div class="relative z-10 min-h-screen flex items-center justify-center px-5">
 
-            <div id="modalContent"
-                class="bg-white rounded-xl p-8 max-w-sm w-full shadow-2xl transform scale-95 transition-transform duration-300 relative pointer-events-auto">
+        <!-- Card -->
+        <div
+            id="modalContent"
+            class="relative w-full max-w-[435px] rounded-[20px] border border-[#67686B99] backdrop-blur-[10px] shadow-[0_20px_80px_rgba(0,0,0,0.65)] px-8 py-10 md:px-[50px] md:py-[30px] transition-all duration-300 bg-[#0000001A] "
+        >
 
-                <!-- Close -->
-                <button id="closeModalBtn"
-                    class="absolute top-4 right-4 text-gray-400 hover:text-gray-800 transition-colors"
-                    aria-label="Close modal">
+            <!-- Inner subtle glow -->
+            <div class="absolute inset-0 rounded-[32px] bg-[linear-gradient(to_bottom_right,rgba(255,255,255,0.03),transparent)] pointer-events-none"></div>
 
-                    <svg class="w-5 h-5"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24">
+            <!-- Close -->
+            <button
+                id="closeModalBtn"
+                class="absolute top-5 right-5 text-white/35 hover:text-white transition duration-300"
+            >
+                <svg
+                    class="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M6 18L18 6M6 6l12 12"
+                    />
+                </svg>
+            </button>
 
-                        <path stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M6 18L18 6M6 6l12 12">
-                        </path>
-                    </svg>
-                </button>
+            <!-- Heading -->
+            <div class="text-center">
 
-                <h3 id="modal-title"
-                    class="font-heading text-prive-dark text-[24px] mb-2 text-center">
-                    Secure Access
+                <h3 class="text-[35px] leading-none font-light text-white tracking-[-0.03em] font-heading ">
+                    Access
                 </h3>
 
-                <p class="font-body text-gray-500 text-[14px] mb-6 text-center">
-                    Please enter your access code.
+            </div>
+
+            <!-- Form -->
+            <form id="accessForm" class="mt-[20px] flex flex-col gap-[20px]">
+
+                <!-- Input -->
+                <input
+                    id="secretInput"
+                    type="text"
+                    required
+                    placeholder="ENTER ACCESS CODE"
+                    class="w-full h-[48px] rounded-[4px] border border-[#67686B80] bg-[#0000001A] backdrop-blur-[20px] px-6 text-center text-white text-[18px] tracking-[0.08em] uppercase outline-none transition-all duration-300 placeholder:text-[#67686B] focus:border-[#C9A227] focus:bg-black/30"
+                />
+
+                <!-- Error -->
+                <p
+                    id="errorText"
+                    class="hidden text-red-400 text-center text-[13px]"
+                >
+                    Invalid access code
                 </p>
 
-                <form id="accessForm" class="flex flex-col gap-4">
+                <!-- Button -->
+                <button
+                    type="submit"
+                    class="w-full h-[48px] rounded-[4px] bg-[linear-gradient(to_bottom,#EBCE70,#AD8A27)] text-white text-[20px] font-medium transition-all duration-300 hover:brightness-110 active:scale-[0.98]"
+                >
+                    Get Access
+                </button>
 
-                    <input
-                        id="secretInput"
-                        type="text"
-                        required
-                        placeholder="Enter access code"
-                        class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:border-prive-gold focus:ring-1 focus:ring-prive-gold font-body text-center tracking-[0.2em] uppercase transition-colors"
-                    />
+            </form>
 
-                    <p id="errorText"
-                        class="hidden text-red-500 text-[13px] text-center">
-                        Invalid access code
-                    </p>
-
-                    <button
-                        type="submit"
-                        class="w-full bg-prive-gold text-white font-body font-medium py-3 rounded-lg hover:bg-[#b0964d] transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-prive-gold">
-
-                        Get Access
-                    </button>
-
-                </form>
-            </div>
+        </div>
         </div>
     </div>
 
