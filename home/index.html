@@ -9,16 +9,33 @@
             opacity: 0 !important;
         }
     </style>
-    <script>
-  const params = new URLSearchParams(window.location.search);
-  const code = params.get("accessCode");
+<script>
+(function () {
+    // Already authenticated
+    if (sessionStorage.getItem("prive_access") === "granted") {
+        return;
+    }
 
-  if (
-    code !== "PRIVE2026" &&
-    !document.referrer.includes(window.location.origin)
-  ) {
+    // Check URL parameter
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get("accessCode");
+
+    if (code && code.toUpperCase() === "PRIVE2026") {
+        sessionStorage.setItem("prive_access", "granted");
+
+        // Remove the query parameter
+        history.replaceState(
+            {},
+            "",
+            window.location.pathname
+        );
+
+        return;
+    }
+
+    // No access
     window.location.replace("/");
-  }
+})();
 </script>
 	<!-- <script>
         /*

@@ -425,19 +425,33 @@ const ACCESS_CODES = [
             SUCCESS
             */
 
-            if (ACCESS_CODES.includes(enteredCode)) {
+            // if (ACCESS_CODES.includes(enteredCode)) {
 
-                btn.innerText = 'Access Granted';
+            //     btn.innerText = 'Access Granted';
 
-                setTimeout(() => {
+            //     setTimeout(() => {
 
-                    window.location.href = REDIRECT_URL;
+            //         window.location.href = REDIRECT_URL;
 
-                }, 500);
+            //     }, 500);
 
-                return;
-            }
+            //     return;
+            // }
+if (ACCESS_CODES.includes(enteredCode)) {
 
+    btn.innerText = 'Access Granted';
+
+    // Save access
+    sessionStorage.setItem("prive_access", "granted");
+
+    setTimeout(() => {
+
+        window.location.href = REDIRECT_URL;
+
+    }, 500);
+
+    return;
+}
 
 
             /*
