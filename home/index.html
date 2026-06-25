@@ -9,7 +9,18 @@
             opacity: 0 !important;
         }
     </style>
-	<script>
+    <script>
+  const params = new URLSearchParams(window.location.search);
+  const code = params.get("accessCode");
+
+  if (
+    code !== "PRIVE2026" &&
+    !document.referrer.includes(window.location.origin)
+  ) {
+    window.location.replace("/");
+  }
+</script>
+	<!-- <script>
         /*
         ==========================================
         BLOCK DIRECT ACCESS
@@ -23,7 +34,7 @@
             window.location.replace("/");
 
         }
-    </script>
+    </script> -->
 	<script>try{if(localStorage.getItem("__framer_force_showing_editorbar_since")){const n=document.createElement("link");n.rel = "modulepreload";n.href="https://framer.com/edit/init.mjs";document.head.appendChild(n)}}catch(e){}</script>
 	<!-- Start of headStart -->
     
