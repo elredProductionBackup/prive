@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privé - Invitation Only</title>
+    <meta name="description" content="An invitation-only gathering to shape what is coming next">
+    <meta name="framer-search-index"
+        content="https://framerusercontent.com/sites/4at4Ai9iEuEoC5V4gZMIKA/searchIndex-Y2jjl4QiYM0x.json">
+    <meta name="framer-search-index-fallback"
+        content="https://framerusercontent.com/sites/4at4Ai9iEuEoC5V4gZMIKA/searchIndex-zyGarmXwJA30.json">
+    <meta name="framer-html-plugin" content="disable">
+    <link href="https://framerusercontent.com/images/SkWS9oa1yKP5DYKrl6X1fMUXvY.png" rel="icon"
+        media="(prefers-color-scheme: light)">
+    <link href="https://framerusercontent.com/images/SkWS9oa1yKP5DYKrl6X1fMUXvY.png" rel="icon"
+        media="(prefers-color-scheme: dark)">
+    <link rel="apple-touch-icon" href="https://framerusercontent.com/images/EaB0dELqxZsAltOXbwtQceWH2L0.png">
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Privé">
+    <meta property="og:description" content="An invitation-only gathering to shape what is coming next">
+    <meta property="og:image" content="https://framerusercontent.com/images/TbupFcVUUND0wGTotPj3SuFr0U.webp">
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Privé">
+    <meta name="twitter:description" content="An invitation-only gathering to shape what is coming next">
+    <meta name="twitter:image" content="https://framerusercontent.com/images/TbupFcVUUND0wGTotPj3SuFr0U.webp">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;1,400&family=Lora:wght@400;500&family=Playfair+Display:wght@700&display=swap"
+        rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        prive: {
+                            gold: '#C5A859',
+                            dark: '#1A1A1A',
+                            text: '#333333'
+                        }
+                    },
+                    fontFamily: {
+                        'logo': ['"Playfair Display"', 'serif'],
+                        'heading': ['"Lora"', 'serif'],
+                        'body': ['"Inter"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        .backdrop-blur-2xl {
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+        }
+
+        .backdrop-blur-3xl {
+            backdrop-filter: blur(64px);
+            -webkit-backdrop-filter: blur(64px);
+        }
+
+        .backdrop-blur-xl {
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+        }
+
+        input:focus {
+            border-color: #C9A227 !important;
+            outline: none;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .animate-pulse {
+            animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        #success-popup {
+            display: none;
+        }
+
+        #success-popup.active {
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+
+    <main class="relative min-h-screen overflow-hidden">
+
+        <!-- BACKGROUND IMAGE -->
+        <div
+            class="absolute inset-0 bg-cover bg-center"
+            style="background-image: url('../assets/images/back-img-1.webp');"
+        ></div>
+
+        <!-- Dark Overlay -->
+        <div class="absolute inset-0" style="background-color: rgba(0,0,0,0.55);"></div>
+
+        <!-- Main Content -->
+        <div class="relative z-10 flex min-h-screen items-center justify-center px-6">
+            <div class="w-full max-w-lg">
+
+                <!-- Logo -->
+                <h1 class="mb-10 text-center text-5xl text-[#C9A227]" style="font-family: 'Playfair Display', serif;">
+                    Privé
+                </h1>
+
+                <!-- Form Card -->
+                <div class="rounded-3xl border border-white/10 p-8 shadow-2xl backdrop-blur-2xl"
+                    style="background-color: rgba(255,255,255,0.10); border-color: rgba(255,255,255,0.10);">
+
+                    <h2 class="text-center text-3xl text-white mb-6" style="font-family: 'Lora', serif; font-weight: 400;">
+                        I am keen to preserve my legacy
+                    </h2>
+
+                    <form id="prive-form" class="space-y-4" onsubmit="handleSubmit(event)">
+
+                        <input
+                            type="text"
+                            name="firstName"
+                            id="firstName"
+                            placeholder="First Name"
+                            required
+                            class="w-full rounded-xl px-5 py-4 text-white outline-none"
+                            style="border: 1px solid rgba(255,255,255,0.20); background-color: rgba(255,255,255,0.05); color: white; font-family: 'Inter', sans-serif;"
+                        />
+
+                        <input
+                            type="text"
+                            name="lastName"
+                            id="lastName"
+                            placeholder="Last Name"
+                            required
+                            class="w-full rounded-xl px-5 py-4 text-white outline-none"
+                            style="border: 1px solid rgba(255,255,255,0.20); background-color: rgba(255,255,255,0.05); color: white; font-family: 'Inter', sans-serif;"
+                        />
+
+                        <input
+                            type="email"
+                            name="email"
+                            id="email"
+                            placeholder="Email Address"
+                            required
+                            class="w-full rounded-xl px-5 py-4 text-white outline-none"
+                            style="border: 1px solid rgba(255,255,255,0.20); background-color: rgba(255,255,255,0.05); color: white; font-family: 'Inter', sans-serif;"
+                        />
+
+                        <input
+                            type="tel"
+                            name="phone"
+                            id="phone"
+                            placeholder="Phone Number"
+                            required
+                            class="w-full rounded-xl px-5 py-4 text-white outline-none"
+                            style="border: 1px solid rgba(255,255,255,0.20); background-color: rgba(255,255,255,0.05); color: white; font-family: 'Inter', sans-serif;"
+                        />
+
+                        <button
+                            type="submit"
+                            id="submit-btn"
+                            class="mt-4 w-full rounded-xl py-4 font-semibold transition"
+                            style="background-color: #C9A227; color: black; font-family: 'Inter', sans-serif; font-weight: 600; cursor: pointer;"
+                            onmouseover="this.style.opacity='0.9'"
+                            onmouseout="this.style.opacity='1'"
+                        >
+                            Submit
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- SUCCESS POPUP -->
+        <div id="success-popup"
+            class="fixed inset-0 z-50 items-center justify-center px-6"
+            style="background-color: rgba(0,0,0,0.50); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);">
+
+            <div class="w-full max-w-md overflow-hidden rounded-3xl p-10 text-center"
+                style="border: 1px solid rgba(255,255,255,0.10); background-color: rgba(255,255,255,0.10); backdrop-filter: blur(64px); -webkit-backdrop-filter: blur(64px); box-shadow: 0 30px 80px rgba(0,0,0,0.5);">
+
+                <!-- Gold Circle -->
+                <div class="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full"
+                    style="border: 1px solid rgba(201,162,39,0.40); background-color: rgba(201,162,39,0.10);">
+                    <span class="text-4xl" style="color: #C9A227;">✓</span>
+                </div>
+
+                <!-- Small Label -->
+                <p class="mb-3 text-xs uppercase" style="letter-spacing: 0.35em; color: #C9A227; font-family: 'Inter', sans-serif;">
+                    Privé
+                </p>
+
+                <!-- Heading -->
+                <h2 class="mb-4 text-3xl font-light text-white" style="font-family: 'Lora', serif; font-weight: 300;">
+                    Your Interest is Acknowledged
+                </h2>
+
+                <!-- Divider -->
+                <div class="mx-auto mb-5" style="height: 1px; width: 64px; background-color: rgba(201,162,39,0.40);"></div>
+
+                <!-- Description -->
+                <p class="mb-6 text-sm text-gray-300" style="line-height: 1.75; font-family: 'Inter', sans-serif;">
+                    Thank you for expressing your interest in Privé.
+                </p>
+
+                <!-- Status -->
+                <div class="flex items-center justify-center gap-2 text-sm" style="color: #C9A227; font-family: 'Inter', sans-serif;">
+                    <span class="h-2 w-2 rounded-full animate-pulse" style="background-color: #C9A227; display: inline-block;"></span>
+                    Redirecting to your private experience...
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        // Style placeholders white
+        const style = document.createElement('style');
+        style.textContent = `
+            input::placeholder { color: rgba(255,255,255,0.85); }
+            input:focus { border-color: #C9A227 !important; }
+        `;
+        document.head.appendChild(style);
+
+        async function handleSubmit(e) {
+            e.preventDefault();
+
+            const btn = document.getElementById('submit-btn');
+            btn.disabled = true;
+            btn.textContent = 'Submitting...';
+            btn.style.opacity = '0.70';
+
+            // Simulate API call
+            await new Promise(resolve => setTimeout(resolve, 2000));
+
+            const code = 'PRIVE2026';
+
+            // Show success popup
+            const popup = document.getElementById('success-popup');
+            popup.classList.add('active');
+
+            // Redirect after 1.5 seconds
+            setTimeout(() => {
+                window.location.href = `https://theprive.network/home?accessCode=${code}`;
+            }, 1500);
+        }
+    </script>
+
+</body>
+</html>
