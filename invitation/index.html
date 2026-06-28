@@ -241,28 +241,42 @@
         `;
         document.head.appendChild(style);
 
-        async function handleSubmit(e) {
-            e.preventDefault();
+async function handleSubmit(e) {
+    e.preventDefault();
 
-            const btn = document.getElementById('submit-btn');
-            btn.disabled = true;
-            btn.textContent = 'Submitting...';
-            btn.style.opacity = '0.70';
+    const btn = document.getElementById('submit-btn');
+    btn.disabled = true;
+    btn.textContent = 'Submitting...';
+    btn.style.opacity = '0.70';
 
-            // Simulate API call
-            await new Promise(resolve => setTimeout(resolve, 2000));
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbydBA-HxVOOy9U8etNJp01hrtn1ni_NGCwnfZVKUeOZi2nH45wP84xHSfaAFsHbdLSD/exec'; // ← paste your Web App URL here
 
-            const code = 'PRIVE2026';
+const params = new URLSearchParams({
+    firstName: document.getElementById('firstName').value,
+    lastName:  document.getElementById('lastName').value,
+    email:     document.getElementById('email').value,
+    phone:     document.getElementById('phone').value,
+});
 
-            // Show success popup
-            const popup = document.getElementById('success-popup');
-            popup.classList.add('active');
+try {
+    await fetch(`${SCRIPT_URL}?${params.toString()}`, {
+        method: 'GET',  // GET with query params — works reliably with no-cors
+        mode: 'no-cors',
+    });
+} catch (err) {
+    console.error('Sheet submission failed:', err);
+}
+    const code = 'PRIVE2026';
 
-            // Redirect after 1.5 seconds
-            setTimeout(() => {
-                window.location.href = `https://theprive.network/home?accessCode=${code}`;
-            }, 1500);
-        }
+    // Show success popup
+    const popup = document.getElementById('success-popup');
+    popup.classList.add('active');
+
+    // Redirect after 1.5 seconds
+    setTimeout(() => {
+        window.location.href = `https://theprive.network/home/?accessCode=${code}`;
+    }, 1500);
+}
     </script>
 
 </body>
