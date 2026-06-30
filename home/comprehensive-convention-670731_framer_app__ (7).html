@@ -4,40 +4,6 @@
 <html lang="en" data-redirect-timezone="1">
 <head>
 	<meta charset="utf-8">
-                       <style>
-        #__framer-badge-container{
-            display: none !important;
-            opacity: 0 !important;
-        }
-    </style>
-    <script>
-    (function () {
-        // Already authenticated
-        if (sessionStorage.getItem("prive_access") === "granted") {
-            return;
-        }
-
-        // Check URL parameter
-        const params = new URLSearchParams(window.location.search);
-        const code = params.get("accessCode");
-
-        if (code && code.toUpperCase() === "PRIVE2026") {
-            sessionStorage.setItem("prive_access", "granted");
-
-            // Remove the query parameter
-            history.replaceState(
-                {},
-                "",
-                window.location.pathname
-            );
-
-            return;
-        }
-
-        // No access
-        window.location.replace("/");
-    })();
-    </script>
 	<meta name="viewport" content="width=device-width">
 	<meta name="generator" content="Framer b8c9ccb">
 	<title>Privé</title>
