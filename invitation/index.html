@@ -28,13 +28,6 @@
 
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;1,400&family=Lora:wght@400;500&family=Playfair+Display:wght@700&display=swap"
-        rel="stylesheet">
-
     <script>
         tailwind.config = {
             theme: {
@@ -45,11 +38,6 @@
                             dark: '#1A1A1A',
                             text: '#333333'
                         }
-                    },
-                    fontFamily: {
-                        'logo': ['"Playfair Display"', 'serif'],
-                        'heading': ['"Lora"', 'serif'],
-                        'body': ['"Inter"', 'sans-serif'],
                     }
                 }
             }
@@ -99,6 +87,85 @@
         #success-popup.active {
             display: flex;
         }
+
+        /* Submit button states */
+        #submit-btn {
+            transition: opacity 0.25s ease;
+        }
+        #submit-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        /* Phone validation hint */
+        #phone-error {
+            display: none;
+            color: #E5A3A3;
+            font-size: 12px;
+            margin-top: 4px;
+            padding-left: 4px;
+        }
+        #phone-error.show {
+            display: block;
+        }
+
+        /* Attendance option selector */
+        .attend-label {
+            letter-spacing: 0.06em;
+            color: rgba(255,255,255,0.75);
+        }
+
+        /* Always two columns — same on mobile and desktop */
+        .attend-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .attend-option {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 56px;
+            padding: 8px 8px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.20);
+            background-color: rgba(255,255,255,0.05);
+            color: rgba(255,255,255,0.85);
+            /* auto-scales: min 11px on tiny phones, up to 13px on desktop */
+            font-size: clamp(11px, 3vw, 13px);
+            line-height: 1.3;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+
+        .attend-option:hover {
+            border-color: rgba(201,162,39,0.55);
+        }
+
+        .attend-radio {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .attend-radio:checked + .attend-option {
+            border-color: #C9A227;
+            background-color: rgba(201,162,39,0.15);
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        /* Responsive typography */
+        .card-title { font-size: 1.5rem; }
+        .card-subtitle { font-size: 1.05rem; }
+
+        @media (min-width: 480px) {
+            .card-title { font-size: 1.875rem; }
+            .card-subtitle { font-size: 1.25rem; }
+        }
     </style>
 </head>
 <body>
@@ -108,31 +175,28 @@
         <!-- BACKGROUND IMAGE -->
         <div
             class="absolute inset-0 bg-cover bg-center"
-            style="background-image: url('../assets/images/back-img-1.webp');"
+            style="background-image: url('../assets/images/back-bg.webp');"
         ></div>
 
         <!-- Dark Overlay -->
         <div class="absolute inset-0" style="background-color: rgba(0,0,0,0.55);"></div>
 
         <!-- Main Content -->
-        <div class="relative z-10 flex min-h-screen items-center justify-center px-6">
-            <div class="w-full max-w-lg flex flex-col items-center ">
-
-                <!-- Logo -->
-                <!-- <h1 class="mb-10 text-center text-5xl text-[#C9A227]" style="font-family: 'Playfair Display', serif;">
-                    Privé
-                </h1> -->
-                <img class="w-[150px] mb-[50px]" src="../assets/logo/prive-logo.svg" alt="Prive Logo">
+        <div class="relative z-10 flex min-h-screen items-center justify-center px-4 sm:px-6 py-8">
+            <div class="w-full max-w-[500px] flex flex-col items-center ">
 
                 <!-- Form Card -->
-                <div class="rounded-3xl border border-white/10 p-8 shadow-2xl backdrop-blur-2xl"
+                <div class="w-full rounded-3xl border border-white/10 p-5 sm:p-6 shadow-2xl backdrop-blur-2xl"
                     style="background-color: rgba(255,255,255,0.10); border-color: rgba(255,255,255,0.10);">
 
-                    <h2 class="text-center text-3xl text-white mb-6" style="font-family: 'Lora', serif; font-weight: 400;">
-                        I am keen to preserve my legacy
+                    <h2 class="card-title text-center text-white mb-3" style="font-weight: 400;">
+                        Nilaya Anthology, Lower Parel, Mumbai
+                    </h2>
+                    <h2 class="card-subtitle text-center text-white mb-4" style="font-weight: 400;">
+                        12th July, 7.00 pm - 10.00 pm
                     </h2>
 
-                    <form id="prive-form" class="space-y-4" onsubmit="handleSubmit(event)">
+                    <form id="prive-form" class="space-y-3" onsubmit="handleSubmit(event)">
 
                         <input
                             type="text"
@@ -140,8 +204,8 @@
                             id="firstName"
                             placeholder="First Name"
                             required
-                            class="w-full rounded-xl px-5 py-4 text-white outline-none"
-                            style="border: 1px solid rgba(255,255,255,0.20); background-color: rgba(255,255,255,0.05); color: white; font-family: 'Inter', sans-serif;"
+                            class="w-full rounded-xl px-4 py-3 text-white outline-none"
+                            style="border: 1px solid rgba(255,255,255,0.20); background-color: rgba(255,255,255,0.05); color: white;"
                         />
 
                         <input
@@ -150,37 +214,54 @@
                             id="lastName"
                             placeholder="Last Name"
                             required
-                            class="w-full rounded-xl px-5 py-4 text-white outline-none"
-                            style="border: 1px solid rgba(255,255,255,0.20); background-color: rgba(255,255,255,0.05); color: white; font-family: 'Inter', sans-serif;"
+                            class="w-full rounded-xl px-4 py-3 text-white outline-none"
+                            style="border: 1px solid rgba(255,255,255,0.20); background-color: rgba(255,255,255,0.05); color: white;"
                         />
 
-                        <input
-                            type="email"
-                            name="email"
-                            id="email"
-                            placeholder="Email Address"
-                            required
-                            class="w-full rounded-xl px-5 py-4 text-white outline-none"
-                            style="border: 1px solid rgba(255,255,255,0.20); background-color: rgba(255,255,255,0.05); color: white; font-family: 'Inter', sans-serif;"
-                        />
+                        <div>
+                            <input
+                                type="tel"
+                                name="phone"
+                                id="phone"
+                                placeholder="Phone Number (10 digits)"
+                                required
+                                inputmode="numeric"
+                                maxlength="10"
+                                autocomplete="tel"
+                                class="w-full rounded-xl px-4 py-3 text-white outline-none"
+                                style="border: 1px solid rgba(255,255,255,0.20); background-color: rgba(255,255,255,0.05); color: white;"
+                            />
+                            <p id="phone-error">Please enter a valid 10-digit phone number.</p>
+                        </div>
 
-                        <input
-                            type="tel"
-                            name="phone"
-                            id="phone"
-                            placeholder="Phone Number"
-                            required
-                            class="w-full rounded-xl px-5 py-4 text-white outline-none"
-                            style="border: 1px solid rgba(255,255,255,0.20); background-color: rgba(255,255,255,0.05); color: white; font-family: 'Inter', sans-serif;"
-                        />
+                        <!-- ATTENDANCE QUESTION -->
+                        <div class="pt-1">
+                            <div class="attend-grid">
+                                <label>
+                                    <input class="attend-radio" type="radio" name="attendance" value="I will drop by alone" required>
+                                    <span class="attend-option">I will drop by alone</span>
+                                </label>
+                                <label>
+                                    <input class="attend-radio" type="radio" name="attendance" value="my wife and i will join in">
+                                    <span class="attend-option">My wife and i will join in</span>
+                                </label>
+                                <label>
+                                    <input class="attend-radio" type="radio" name="attendance" value="we will join with our adult children">
+                                    <span class="attend-option">We will join with our adult children</span>
+                                </label>
+                                <label>
+                                    <input class="attend-radio" type="radio" name="attendance" value="I am unable to join in">
+                                    <span class="attend-option">I am unable to join in</span>
+                                </label>
+                            </div>
+                        </div>
 
                         <button
                             type="submit"
                             id="submit-btn"
-                            class="mt-4 w-full rounded-xl py-4 font-semibold transition"
-                            style="background-color: #C9A227; color: black; font-family: 'Inter', sans-serif; font-weight: 600; cursor: pointer;"
-                            onmouseover="this.style.opacity='0.9'"
-                            onmouseout="this.style.opacity='1'"
+                            disabled
+                            class="mt-3 w-full rounded-xl py-3 font-semibold"
+                            style="background-color: #C9A227; color: black; font-weight: 600;"
                         >
                             Submit
                         </button>
@@ -192,42 +273,30 @@
 
         <!-- SUCCESS POPUP -->
         <div id="success-popup"
-            class="fixed inset-0 z-50 items-center justify-center px-6"
+            class="fixed inset-0 z-50 items-center justify-center px-4 sm:px-6"
             style="background-color: rgba(0,0,0,0.50); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);">
 
-            <div class="w-full max-w-md overflow-hidden rounded-3xl p-10 text-center flex flex-col items-center"
+            <div class="w-full max-w-md overflow-hidden rounded-3xl p-6 text-center flex flex-col items-center"
                 style="border: 1px solid rgba(255,255,255,0.10); background-color: rgba(255,255,255,0.10); backdrop-filter: blur(64px); -webkit-backdrop-filter: blur(64px); box-shadow: 0 30px 80px rgba(0,0,0,0.5);">
 
                 <!-- Gold Circle -->
-                <div class="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full"
+                <div class="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full"
                     style="border: 1px solid rgba(201,162,39,0.40); background-color: rgba(201,162,39,0.10);">
                     <span class="text-4xl" style="color: #C9A227;">✓</span>
                 </div>
 
-                <!-- Small Label -->
-                <!-- <p class="mb-3 text-xs uppercase" style="letter-spacing: 0.35em; color: #C9A227; font-family: 'Inter', sans-serif;">
-                    Privé
-                </p> -->
-                <img class="w-[70px] mb-[20px]" src="../assets/logo/prive-logo.svg" alt="Prive Logo">
-
                 <!-- Heading -->
-                <h2 class="mb-4 text-3xl font-light text-white" style="font-family: 'Lora', serif; font-weight: 300;">
+                <h2 class="mb-3 text-3xl font-light text-white" style="font-weight: 300;">
                     Your Interest is Acknowledged
                 </h2>
 
                 <!-- Divider -->
-                <div class="mx-auto mb-5" style="height: 1px; width: 64px; background-color: rgba(201,162,39,0.40);"></div>
+                <div class="mx-auto mb-4" style="height: 1px; width: 64px; background-color: rgba(201,162,39,0.40);"></div>
 
                 <!-- Description -->
-                <p class="mb-6 text-sm text-gray-300" style="line-height: 1.75; font-family: 'Inter', sans-serif;">
+                <p class="text-sm text-gray-300" style="line-height: 1.75;">
                     Thank you for expressing your interest
                 </p>
-
-                <!-- Status -->
-                <!-- <div class="flex items-center justify-center gap-2 text-sm" style="color: #C9A227; font-family: 'Inter', sans-serif;">
-                    <span class="h-2 w-2 rounded-full animate-pulse" style="background-color: #C9A227; display: inline-block;"></span>
-                    Redirecting to your private experience...
-                </div> -->
 
             </div>
         </div>
@@ -243,31 +312,98 @@
         `;
         document.head.appendChild(style);
 
+        // ---- Elements ----
+        const submitBtn = document.getElementById('submit-btn');
+        const phoneInput = document.getElementById('phone');
+        const phoneError = document.getElementById('phone-error');
+
+        // Keep only digits and cap at 10 as the user types / pastes
+        phoneInput.addEventListener('input', function () {
+            const digitsOnly = phoneInput.value.replace(/\D/g, '').slice(0, 10);
+            if (phoneInput.value !== digitsOnly) {
+                phoneInput.value = digitsOnly;
+            }
+            updatePhoneError();
+            checkFormValidity();
+        });
+
+        function isPhoneValid() {
+            return /^\d{10}$/.test(phoneInput.value.trim());
+        }
+
+        function updatePhoneError() {
+            const val = phoneInput.value.trim();
+            // Show hint only if something is typed but it's not yet 10 digits
+            if (val.length > 0 && !isPhoneValid()) {
+                phoneError.classList.add('show');
+            } else {
+                phoneError.classList.remove('show');
+            }
+        }
+
+        // ---- Enable submit only when all four fields are valid ----
+        function checkFormValidity() {
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName  = document.getElementById('lastName').value.trim();
+            const attendance = document.querySelector('input[name="attendance"]:checked');
+
+            const allValid = firstName && lastName && isPhoneValid() && attendance;
+            submitBtn.disabled = !allValid;   // CSS handles opacity + cursor
+        }
+
+        // Watch text inputs
+        ['firstName', 'lastName'].forEach(function (id) {
+            document.getElementById(id).addEventListener('input', checkFormValidity);
+        });
+        // Watch attendance radios
+        document.querySelectorAll('input[name="attendance"]').forEach(function (r) {
+            r.addEventListener('change', checkFormValidity);
+        });
+        // Set initial state
+        checkFormValidity();
+
+        // Hover feedback only when enabled
+        submitBtn.addEventListener('mouseover', function () {
+            if (!submitBtn.disabled) submitBtn.style.opacity = '0.9';
+        });
+        submitBtn.addEventListener('mouseout', function () {
+            if (!submitBtn.disabled) submitBtn.style.opacity = '1';
+        });
+
 async function handleSubmit(e) {
     e.preventDefault();
 
-    const btn = document.getElementById('submit-btn');
-    btn.disabled = true;
-    btn.textContent = 'Submitting...';
-    btn.style.opacity = '0.70';
+    // Safety guard: don't submit if somehow triggered while incomplete/invalid
+    checkFormValidity();
+    if (submitBtn.disabled) {
+        updatePhoneError();
+        return;
+    }
 
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbydBA-HxVOOy9U8etNJp01hrtn1ni_NGCwnfZVKUeOZi2nH45wP84xHSfaAFsHbdLSD/exec'; // ← paste your Web App URL here
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Submitting...';
 
-const params = new URLSearchParams({
-    firstName: document.getElementById('firstName').value,
-    lastName:  document.getElementById('lastName').value,
-    email:     document.getElementById('email').value,
-    phone:     document.getElementById('phone').value,
-});
+// ← paste your Web App URL here
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxvDRP4VXg5S7sjioxgtdE0Pt4RAqcmQ4ZcCrV7xAXU9wXBHJOj9eZjXlG0_NMbfS1_/exec'; // ← paste your Web App URL here
 
-try {
-    await fetch(`${SCRIPT_URL}?${params.toString()}`, {
-        method: 'GET',  // GET with query params — works reliably with no-cors
-        mode: 'no-cors',
+    const attendanceEl = document.querySelector('input[name="attendance"]:checked');
+
+    const params = new URLSearchParams({
+        firstName:  document.getElementById('firstName').value,
+        lastName:   document.getElementById('lastName').value,
+        phone:      document.getElementById('phone').value,
+        attendance: attendanceEl ? attendanceEl.value : '',
     });
-} catch (err) {
-    console.error('Sheet submission failed:', err);
-}
+
+    try {
+        await fetch(`${SCRIPT_URL}?${params.toString()}`, {
+            method: 'GET',  // GET with query params — works reliably with no-cors
+            mode: 'no-cors',
+        });
+    } catch (err) {
+        console.error('Sheet submission failed:', err);
+    }
+
     const code = 'PRIVE2026';
 
     // Show success popup
