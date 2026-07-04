@@ -395,18 +395,19 @@ async function handleSubmit(e) {
         attendance: attendanceEl ? attendanceEl.value : '',
     });
 
+    // Show success popup immediately (fast UX), stay on the page (no redirect)
+    document.getElementById('success-popup').classList.add('active');
+
+    // Still send reliably in the background; keepalive lets it finish
     try {
         await fetch(`${SCRIPT_URL}?${params.toString()}`, {
             method: 'GET',  // GET with query params — works reliably with no-cors
             mode: 'no-cors',
+            keepalive: true,
         });
     } catch (err) {
         console.error('Sheet submission failed:', err);
     }
-
-    // Show success popup and stay on the page (no redirect)
-    const popup = document.getElementById('success-popup');
-    popup.classList.add('active');
 }
     </script>
 
