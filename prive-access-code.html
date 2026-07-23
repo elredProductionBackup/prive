@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privé - Invitation Only</title>
+    <meta name="description" content="An invitation-only gathering to shape what is coming next">
+
+    <link href="https://framerusercontent.com/images/Rqpi1Ukz98j11kh1HKwnzKlqaI.png" rel="icon" media="(prefers-color-scheme: light)">
+    <link href="https://framerusercontent.com/images/Rqpi1Ukz98j11kh1HKwnzKlqaI.png" rel="icon" media="(prefers-color-scheme: dark)">
+    <link rel="apple-touch-icon" href="https://framerusercontent.com/images/aiIgzE8VbdGOGGu3UOSlIHRmL8.png">
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Privé">
+    <meta property="og:description" content="An invitation-only gathering to shape what is coming next">
+    <meta property="og:image" content="https://framerusercontent.com/images/oBWoU49bSxBhri8ak76U3womqMc.png">
+    <!-- X -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Privé">
+    <meta name="twitter:description" content="An invitation-only gathering to shape what is coming next">
+    <meta name="twitter:image" content="https://framerusercontent.com/images/oBWoU49bSxBhri8ak76U3womqMc.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Fallback serif kept only for graceful degradation before Mencken loads -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /*
+        ==========================================================
+        MENCKEN STD  —  DROP YOUR OTF FILES HERE
+        ==========================================================
+        Put your font file(s) in:   assets/fonts/
+        Then match the filename(s) below to what you actually have.
+
+        Mencken usually ships as a family (Head / Text, multiple weights).
+        For this page the big display type = the "Head" cut, so if you
+        only have one file, point the "regular" src at that.
+        Adjust the url()/filenames to yours — everything else just works.
+        ==========================================================
+        */
+
+        /* Upright / regular */
+        @font-face {
+            font-family: 'Mencken Std';
+            src: url('assets/fonts/MenckenStd-Head.otf') format('opentype');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        /* Bold (used for the logo) — point at your bold OTF if you have it,
+           otherwise it will synth-bold from the regular face above */
+        @font-face {
+            font-family: 'Mencken Std';
+            src: url('assets/fonts/MenckenStd-Head-Bold.otf') format('opentype');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        /* Italic (kept available in case you want it elsewhere) */
+        @font-face {
+            font-family: 'Mencken Std';
+            src: url('assets/fonts/MenckenStd-Head-Italic.otf') format('opentype');
+            font-weight: 400;
+            font-style: italic;
+            font-display: swap;
+        }
+
+        /* Fallback stack: Mencken first, then a close high-contrast serif */
+        .font-logo,
+        .font-heading {
+            font-family: 'Mencken Std', 'Playfair Display', Georgia, 'Times New Roman', serif;
+        }
+
+        .font-body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        /* Ambient gold/dark backdrop shown if BG is missing */
+        .bg-fallback {
+            background:
+                radial-gradient(circle at 50% 0%, rgba(201, 162, 39, 0.18), transparent 45%),
+                radial-gradient(circle at 20% 80%, rgba(120, 90, 30, 0.25), transparent 55%),
+                linear-gradient(160deg, #0d0b07 0%, #1a1509 45%, #0a0906 100%);
+        }
+    </style>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        prive: {
+                            gold: '#C9A227',
+                            dark: '#1A1A1A',
+                            text: '#333333'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body
+    class="font-body min-h-screen overflow-hidden bg-[#060606] text-white antialiased selection:bg-[#C9A227] selection:text-black">
+
+    <!-- Background -->
+    <div class="absolute inset-0 bg-fallback">
+        <img src="https://res.cloudinary.com/dtrv7p3gg/image/upload/v1784631534/d34266ba1ec22741eec3a1a2df43a3e99c372cc4_xjfwbl.webp" class="w-full h-full object-cover opacity-[0.9]" alt=""
+             onerror="this.style.display='none'" />
+
+        <!-- Dark overlay -->
+        <div class="absolute inset-0 bg-black/70"></div>
+
+        <!-- Gold glow -->
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(201,162,39,0.15),transparent_45%)]"></div>
+    </div>
+
+    <!-- Logo (top-left) -->
+    <a href="#" class="absolute z-20 top-6 left-6 md:top-10 md:left-12 inline-flex items-center">
+        <img class="w-[90px] md:w-[120px]" src="assets/logo/prive-logo.svg" alt="Privé"
+             onerror="this.outerHTML='&lt;span class=&quot;font-logo font-bold italic text-[#C9A227] text-[32px] md:text-[40px] tracking-tight leading-none&quot;&gt;Privé&lt;/span&gt;'" />
+    </a>
+
+    <!-- Main Content -->
+   <main class="relative z-10 min-h-[100dvh] pt-[100px] pb-[50px] md:pt-[120px] md:pb-[40px] flex flex-col items-center justify-between px-2 text-center">
+        <!-- Heading (gapped stack) -->
+        <div class="max-w-[960px] flex flex-col items-center gap-2 md:gap-2">
+
+            <!-- INDIA : 112px desktop / 76.8px mobile -->
+            <h1 class="font-heading tracking-[0.3em] font-light text-white leading-none text-[76.8px] md:text-[112px] = pl-[0.12em] md:pl-[0.18em]">
+                INDIA
+            </h1>
+
+            <!-- IS ENTERING ITS : 34.22px desktop / 23.47px mobile -->
+            <div class="flex items-center justify-center gap-3 md:gap-5">
+                <span class="h-px w-8 sm:w-12 md:w-16 bg-white/50"></span>
+                <span class="font-heading uppercase text-white tracking-[0.1em] md:tracking-[0.1em] text-[23.47px] md:text-[34.22px] pl-[0.2em] md:pl-[0.3em] whitespace-nowrap">
+                    Is Entering Its
+                </span>
+                <span class="h-px w-8 sm:w-12 md:w-16 bg-white/50"></span>
+            </div>
+
+            <!-- LARGEST WEALTH CREATION CYCLE : 34.22px desktop / 23.47px mobile -->
+            <h2 class="font-heading font-light uppercase text-white leading-tight tracking-[0.1em] md:tracking-[0.1em] text-[23.47px] md:text-[34.22px] pl-[0.04em] md:pl-[0.1em]">
+                Largest Wealth Creation Cycle
+            </h2>
+
+        </div>
+
+        <div class="flex flex-col gap-[20px]">
+            <!-- Subtext : 25px desktop / 16px mobile, Mencken Std, NOT italic -->
+            <p class="font-heading mt-10 md:mt-14 text-[16px] md:text-[25px] text-white/55 tracking-wide px-2">
+                Participation is currently being extended on an invited basis.
+            </p>
+
+            <!-- Access -->
+            <button id="openModalBtn" class="group  flex flex-col items-center">
+
+                <div class="w-[64px] h-[64px] md:w-[72px] md:h-[72px] rounded-full border border-[#C9A227]/40 bg-white/[0.03] backdrop-blur-xl flex items-center justify-center transition-all duration-300 group-hover:border-[#C9A227] group-hover:bg-[#C9A227]/10 group-hover:scale-105">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-[#C9A227]">
+                        <rect x="5" y="11" width="14" height="10" rx="2" stroke="currentColor" stroke-width="1.5" />
+                        <path d="M8 11V7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7V11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                        <circle cx="12" cy="16" r="1.5" fill="currentColor" />
+                    </svg>
+                </div>
+
+                <span class="mt-4 uppercase tracking-[0.25em] text-[12px] text-white/70 group-hover:text-white transition-colors">
+                    Access
+                </span>
+
+            </button>
+        </div>
+
+    </main>
+
+    <!-- Modal -->
+    <div id="accessModal" class="fixed inset-0 z-50 hidden opacity-0 transition duration-300">
+
+        <div id="modalBackdrop" class="absolute inset-0 bg-black/75"></div>
+
+        <div class="relative z-10 min-h-screen flex items-center justify-center px-5">
+
+            <div id="modalContent"
+                class="relative w-full max-w-[435px] rounded-[20px] border border-[#67686B99] backdrop-blur-[10px] shadow-[0_20px_80px_rgba(0,0,0,0.65)] px-8 py-10 md:px-[50px] md:py-[30px] transition-all duration-300 bg-[#0000001A] scale-95">
+
+                <div class="absolute inset-0 rounded-[32px] bg-[linear-gradient(to_bottom_right,rgba(255,255,255,0.03),transparent)] pointer-events-none"></div>
+
+                <button id="closeModalBtn"
+                    class="absolute top-5 right-5 text-white/35 hover:text-white transition duration-300">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+
+                <div class="text-center">
+                    <h3 class="font-heading text-[35px] leading-none font-light text-white tracking-[-0.03em]">
+                        Access
+                    </h3>
+                </div>
+
+                <form id="accessForm" class="mt-[20px] flex flex-col gap-[20px]">
+                    <input id="secretInput" type="text" required placeholder="ENTER ACCESS CODE"
+                        class="w-full h-[48px] rounded-[4px] border border-[#67686B80] bg-[#0000001A] backdrop-blur-[20px] px-6 text-center text-white text-[18px] tracking-[0.08em] uppercase outline-none transition-all duration-300 placeholder:text-[#67686B] focus:border-[#C9A227] focus:bg-black/30" />
+
+                    <p id="errorText" class="hidden text-red-400 text-center text-[13px]">
+                        Invalid access code
+                    </p>
+
+                    <button type="submit"
+                        class="w-full h-[48px] rounded-[4px] bg-[linear-gradient(to_bottom,#EBCE70,#AD8A27)] text-white text-[20px] font-medium transition-all duration-300 hover:brightness-110 active:scale-[0.98]">
+                        Get Access
+                    </button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /* ========================= CONFIG ========================= */
+
+        const ACCESS_CODES = [
+            "saurabh", "ashish", "samir", "sudiksha", "vikram", "brahmini", "GV", "harsh", "apurva", "subrakant",
+            "vivek", "amit", "gaurav", "irina", "monish", "anirudh", "malaika", "palki", "jyothi", "sidharth",
+            "sunil", "andrea", "harshit", "shilpi", "rajiv", "bhowmik", "prasan", "vasudha", "ashok", "shashwat",
+            "deepthi", "TG", "sanjay", "trista", "nilima", "adrija", "anish", "kapil", "puneet", "yatin", "hital",
+            "bijal", "rajesh", "meir", "salman", "sandeep", "vishal", "jaydeep", "devashish", "soumya", "prasan",
+            "hasnain", "jason", "anjhula", "jignesh", "ankita", "yoshi", "vakil", "kartik", "ali", "deepak",
+            "Abhijit", "Deepak", "Varun", "Bhowmik", "Rajiv", "Harsh", "Shailesh", "Shivam", "Sidharth", "Deepthi", "Gautam",
+            "Vivek", "Pranav", "Anandamayi", "Nishant", "Suhrudh", "Punit", "Gaurang", "Amit", "Krishna", "Nirav", "Navneet",
+            "Vinay", "Ashish", "Vivek", "Manish", "Jalachari", "Nikhil", "Chirag", "Aditya", "Jignesh", "Trista", "Sanjay",
+            "Pavan", "Rajeev", "Gautam", "Atul", "Ashish", "Abhijit", "Sudhir", "Adit", "Tushar", "Parag", "Parag", "Sidharth",
+            "Raj", "Ratan", "Jasjeev", "Vikas", "Qutub", "Shamsh", "Nailesh", "Anjhula", "Aliasgar", "Alisha", "Bobby",
+            "Devashish", "Harsh", "Sanaya", "Vikash", "Jyoti", "Sanjay", "Harsh", "Apurva", "Sidharth", "Vijay", "Sunil", "Amit",
+            "Nikhil", "Devin", "Sandeep", "Prabhat", "Vivek", "Subrakant", "Pushp", "Parmeet", "Naveen", "Maneesh", "Manav",
+            "Ina", "Gaurav", "Gopal", "Gautam", "Chetan", "Anubhav",
+            "Akshay", "Varun", "Pranav", "Dhruv", "Arpit", "Amar", "Tushar", "Brahmini", "Nilima", "Ashok", "Maralidhar",
+            "Salman", "T", "Sarath", "Manni", "Hari", "Narayan", "GV", "Rajesh", "Rajiv", "Srinivas", "Sridhar", "Sucheth",
+            "Suresh", "Vagish", "Vishnu", "Abhijit", "Sheena", "Vivek", "Rajeev", "Javed", "Prashant", "Ashwin", "Ajay",
+            "Saurabh", "Jason", "Nayan", "Gaurav", "Sachin", "Sumit", "Anuj", "Alok", "Monish", "Anish", "Puneet", "Kapil",
+            "Nitin", "Akshay", "Hitesh", "Vaibhav", "Gautam", "Rajyavardhan", "Gokul", "Mannan", "Acha", "Samveg", "Sharvil",
+            "Kulin", "Punit", "Maulik", "Bobby", "Faiz", "Gautam", "Hari", "Sanjay", "Shamir", "Vijay", "Mutthu", "Amit",
+            "Prasan", "Ajay", "Sailesh", "Atul", "Vikas", "Vijay", "Jayent", "Mathew", "Mithun", "Aliasgar", "Alisha", "Nilesh",
+            "Prashant", "Shashwat", "Vivek", "Adarsh", "Utsav", "Ashish", "Vineet", "Vikarm", "Srinivas", "Simran", "Samarth",
+            "Puneet", "Hemant", "Bikram", "Aseem", "Ashish", "Ajit", "Aditya", "Abhishek", "Bejul", "Sandeep", "Anthony",
+            "Abhishek", "Jay", "Amit", "Rajesh", "Ambrish", "Soumya", "Siddhartha", "Sameer", "Ramneek", "Rajev", "Rahul", "Nitin",
+            "Nikhil", "Mohak", "Manjul", "Hemant", "Gourish", "Bikram", "Abhishek", "Abhinav", "Vijay", "Rohan", "Zia",
+            "Susir", "Nitin", "Palki", "General", "Prof", "Shashi", "Swati", "Huzaifa", "Vikram", "Rishi", "Mohit",
+            "Karishma", "Deep", "Hital", "Pallavi", "Sandeep", "Anuj", "Boman", "Neel", "Ravi", "Sidharth", "Puneet",
+            "Ram", "Vijay", "Nikhil", "Ashu", "Prashant", "Srini", "Girish", "Sasha", "Shishir", "Atul", "Devesh",
+            "Bobby", "Farah", "Manish", "Rahul", "Sachin", "Anupam", "Parthiv", "Yogesh", "Shravan", "Apurva",
+            "Rizwan", "Vikas", "Atul", "Ameera", "Monty", "Vishal", "Anuj", "Raj", "Haigrieve", "Adarsh", "Vir",
+            "Rajesh", "Suketu", "Niraj", "Srikanth", "Vikas", "Harsh", "Sumit", "Mitesh", "Manas", "Shreevar",
+            "Shauna", "Anant", "Sidharth", "Karan", "Sahil", "Nitish", "Pratik", "Mayank", "Vinati", "Rahul",
+            "Utpal", "Nadia", "Anurag", "Rajesh", "Ravi", "Percy", "Tushar", "Anish", "Tanveer", "Hemanth",
+            "Arjun", "Shuchi", "Rajesh", "Dhanpal", "Sanjay", "Atman", "Sidharth", "Rahul", "Arunashu", "Prajay",
+            "Sudeep", "Ankur", "Vishesh", "Anand", "Keshav", "Anuj", "Yatin", "Sanjay", "Mihir", "Chaitanya",
+            "Devanshi", "Deep", "Ronak", "Vishal", "Nitin", "Renu", "Rahul", "Isheta", "Rajiv", "Nirbhay",
+            "Arunanshu", "Rajesh", "Vishesh", "Rajesh", "Eapen", "Isha", "Niraj", "Shaunak", "Udit", "Keshav",
+            "Arshad", "Lokesh", "Ameya", "Abhiraj", "Manish", "Percy", "Ashish", "Sanjay", "Karan", "Rishi",
+            "Chaitanya", "Akshay", "Anish", "Anuj", "Harshvardhan", "Punit", "Anant", "Anant", "Siddharth",
+            "Adarsh", "Akshay", "Mihir", "Chaitanya", "Manish", "Shreevar", "Huzaifa", "Puneet", "Ketan",
+            "Deep", "Aman", "Varun", "Vishal", "Hemanth", "Harsh", "Hital", "Nikhil", "Kaval", "Ankita",
+            "Rahul", "Vinati", "Rajesh", "Renu", "Rishabh", "Akshay", "Neel", "Rahul", "Ram", "Ravi", "Viren", "Atul", "Atul", "Sandeep", "Saurabh", "Subodh", "Monty", "Isheta", "Vikram", "Atman",
+            "Monish", "Nibhrant", "Nikhil", "Jai", "Ram", "Ravi", "Vikram", "Karan", "Rajiv", "Srinivas",
+            "Tanveer", "Abhay", "Aditya", "Dhananjay", "Nitin", "Gaurav", "Aakrit", "Varun", "Arun", "Arvind", "namrata", "achal",
+            "manan", "mehul", "jigen", "suhrud", "shrenik", "munish", "prateek", "anand", "raghav", "sandeepa", "manisha", "karishma",
+            "neerav"
+        ].map(code => code.toLowerCase());
+
+        const REDIRECT_URL = "./home/";
+
+        /* ========================= ELEMENTS ========================= */
+
+        const modal = document.getElementById('accessModal');
+        const openBtn = document.getElementById('openModalBtn');
+        const closeBtn = document.getElementById('closeModalBtn');
+        const backdrop = document.getElementById('modalBackdrop');
+        const modalContent = document.getElementById('modalContent');
+        const accessForm = document.getElementById('accessForm');
+        const input = document.getElementById('secretInput');
+        const errorText = document.getElementById('errorText');
+
+        /* ========================= MODAL ========================= */
+
+        function openModal() {
+            modal.classList.remove('hidden');
+            void modal.offsetWidth;
+            modal.classList.remove('opacity-0');
+            modalContent.classList.remove('scale-95');
+            modalContent.classList.add('scale-100');
+            setTimeout(() => input.focus(), 100);
+        }
+
+        function closeModal() {
+            modal.classList.add('opacity-0');
+            modalContent.classList.remove('scale-100');
+            modalContent.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                accessForm.reset();
+                input.classList.remove('border-red-400', 'text-red-500');
+                errorText.classList.add('hidden');
+            }, 300);
+        }
+
+        openBtn.addEventListener('click', openModal);
+        closeBtn.addEventListener('click', closeModal);
+        backdrop.addEventListener('click', closeModal);
+
+        openBtn.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(); }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !modal.classList.contains('hidden')) closeModal();
+        });
+
+        /* ========================= AUTH ========================= */
+
+        accessForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const btn = accessForm.querySelector('button');
+            const originalText = btn.innerText;
+            btn.innerText = 'Verifying...';
+            btn.classList.add('opacity-80', 'cursor-not-allowed');
+
+            const enteredCode = input.value.trim().toLowerCase();
+
+            setTimeout(() => {
+                if (ACCESS_CODES.includes(enteredCode)) {
+                    btn.innerText = 'Access Granted';
+                    sessionStorage.setItem("prive_access", "granted");
+                    setTimeout(() => { window.location.href = REDIRECT_URL; }, 500);
+                    return;
+                }
+
+                btn.innerText = originalText;
+                btn.classList.remove('opacity-80', 'cursor-not-allowed');
+                input.classList.add('border-red-400', 'text-red-500');
+                errorText.classList.remove('hidden');
+
+                setTimeout(() => {
+                    input.classList.remove('border-red-400', 'text-red-500');
+                    errorText.classList.add('hidden');
+                    input.value = '';
+                }, 1500);
+            }, 800);
+        });
+    </script>
+
+</body>
+
+</html>
