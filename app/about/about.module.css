@@ -1,0 +1,157 @@
+/* About page. Privé palette: ink, warm greys, brown band, gold. */
+.main { isolation: isolate; --ink: #1c1917; --ink2: #57534e; --ink3: #8f8a83; --line: #ece6de; --gold: #c9a14a; }
+
+.wrap { max-width: 1320px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 56px); }
+.section { padding: clamp(88px, 11vw, 160px) 0; }
+.surface { background: #fff; }
+.paper { background: #f6f3ef; }
+.bordered { border-top: 1px solid var(--line); }
+.over { position: relative; z-index: 10; }
+
+.imgBox { position: relative; overflow: hidden; background: #e7e2db; }
+.fill { position: absolute; inset: 0; }
+.cover { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.split { display: grid; gap: 48px; }
+.top { align-items: start; }
+@media (min-width: 1024px) { .split { grid-template-columns: 1fr 1fr; gap: 96px; } }
+
+.h1 { margin: 0; font-family: var(--serif); font-weight: 400; font-size: clamp(36px, 4.4vw, 64px); line-height: 1.05; letter-spacing: -0.02em; color: var(--ink); }
+.narrow { max-width: 14ch; }
+.h2Muted { margin: 0; max-width: 20ch; font-family: var(--serif); font-weight: 400; font-size: clamp(28px, 3vw, 42px); line-height: 1.15; letter-spacing: -0.015em; color: #a8a199; }
+.lead { margin: 0; font-family: var(--sans); font-size: clamp(22px, 2.2vw, 30px); font-weight: 480; line-height: 1.35; letter-spacing: -0.025em; color: var(--ink); }
+
+/* ---- 1. Hero ---- */
+.hero { position: sticky; top: 0; z-index: 0; height: 100vh; height: 100svh; min-height: 560px; overflow: hidden; background: #1a1814; }
+.heroCopy { position: relative; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 64px 24px 0; text-align: center; color: #fff; }
+.heroTitle { margin: 0; font-family: var(--serif); font-weight: 400; font-size: clamp(52px, 10vw, 136px); line-height: 0.95; letter-spacing: -0.02em; }
+.heroSub { margin: 24px 0 0; max-width: 26ch; font-family: var(--sans); font-size: clamp(18px, 1.8vw, 24px); line-height: 1.35; color: rgba(255, 255, 255, 0.85); }
+
+/* ---- 2. What we are set out for ---- */
+.leftCol { display: flex; flex-direction: column; justify-content: space-between; gap: 64px; }
+.note { margin: 0; max-width: 34ch; border-top: 1px solid var(--line); padding-top: 24px; font-family: var(--sans); font-size: 18px; line-height: 1.4; color: var(--ink3); }
+.desktopOnly { display: none; }
+.mobileOnly { margin-top: 56px; }
+@media (min-width: 1024px) { .desktopOnly { display: block; } .mobileOnly { display: none; } }
+.cols { display: grid; gap: 32px; margin-top: 64px; }
+.cols p { margin: 0; font-family: var(--sans); font-size: 16px; line-height: 1.65; color: var(--ink2); }
+@media (min-width: 640px) { .cols { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1024px) { .cols { margin-top: 80px; } }
+
+/* ---- 3. Vision (brown band with a soft gold glow) ---- */
+.vision {
+    position: relative;
+    z-index: 0;
+    color: #fff;
+    background: radial-gradient(120% 90% at 85% 10%, rgba(217, 184, 108, 0.28), transparent 60%), linear-gradient(135deg, #5f4627 0%, #7a5c35 55%, #866741 100%);
+}
+.vision .wrap { padding-top: 112px; padding-bottom: 112px; }
+@media (min-width: 768px) {
+    .vision { position: sticky; top: 0; display: flex; align-items: center; height: 100vh; height: 100svh; overflow: hidden; }
+    .vision .wrap { width: 100%; padding-top: 8svh; padding-bottom: 8svh; }
+}
+.visionText { margin: 0; max-width: 28ch; font-family: var(--sans); font-size: clamp(28px, min(4.4vw, 5.2svh), 58px); font-weight: 540; line-height: 1.08; letter-spacing: -0.04em; }
+.visionSecond { margin-top: 32px; color: rgba(255, 255, 255, 0.75); }
+@media (min-width: 768px) { .visionSecond { margin-top: 4svh; } }
+.sign { margin-top: 56px; }
+@media (min-width: 768px) { .sign { margin-top: 6svh; } }
+.signature { margin: 0; font-family: var(--serif); font-weight: 400; font-size: clamp(30px, min(3.4vw, 5.2svh), 46px); line-height: 1.05; letter-spacing: -0.01em; color: #f0dca8; }
+.signName { margin: 14px 0 0; font-family: var(--sans); font-size: 15px; color: rgba(255, 255, 255, 0.85); }
+.signName span { color: rgba(255, 255, 255, 0.6); }
+
+/* ---- 4. Join us ---- */
+.joinLead { margin-top: 40px; max-width: 30ch; }
+.joinMedia { position: relative; aspect-ratio: 4 / 5; border-radius: 24px; overflow: hidden; background: #e7e2db; }
+@media (min-width: 768px) { .joinMedia { aspect-ratio: 6 / 5; } }
+/* Ring of words centred on the photo, always fully inside it (sized from the smaller side) */
+.joinMedia { container-type: size; }
+.ring { position: absolute; left: 50%; top: 50%; width: min(92cqw, 92cqh); aspect-ratio: 1; transform: translate(-50%, -50%); pointer-events: none; color: #fff; }
+.ring svg { display: block; width: 100%; height: 100%; font-family: var(--sans); animation: spin 26s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.points { margin: 48px 0 0; display: flex; flex-direction: column; gap: 32px; }
+.points > div { border-top: 1px solid var(--line); padding-top: 24px; }
+.points dt { font-family: var(--sans); font-size: 22px; font-weight: 500; letter-spacing: -0.03em; color: var(--ink); }
+.points dd { margin: 6px 0 0; font-family: var(--sans); font-size: 17px; color: var(--ink2); }
+
+/* ---- 5. The Tribe ---- */
+.tribeGrid { display: grid; gap: 40px; }
+@media (min-width: 1024px) {
+    .tribeGrid { grid-template-columns: minmax(0, 380px) 1fr; gap: 80px; }
+    .stickyTitle { position: sticky; top: 112px; }
+}
+.kicker { margin: 0; font-family: var(--sans); font-size: 17px; font-weight: 500; color: var(--ink); }
+.intro { margin: 16px 0 0; font-family: var(--sans); font-size: clamp(20px, 2vw, 26px); line-height: 1.4; letter-spacing: -0.02em; color: var(--ink2); }
+.people { list-style: none; margin: 80px 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 20px; row-gap: 48px; }
+@media (min-width: 640px) { .people { column-gap: 32px; } }
+@media (min-width: 1024px) { .people { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.photo { aspect-ratio: 3 / 4; border-radius: 18px; }
+.photo img { transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1); }
+.person:hover .photo img { transform: scale(1.05); }
+.personName { margin: 16px 0 0; font-family: var(--sans); font-size: 18px; font-weight: 500; letter-spacing: -0.02em; color: var(--ink); }
+.personRole { margin: 2px 0 0; font-family: var(--sans); font-size: 15px; color: var(--ink3); }
+.joinTeam { margin-top: 96px; padding-top: 56px; border-top: 1px solid var(--line); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 24px; text-align: center; }
+@media (min-width: 640px) { .joinTeam { flex-direction: row; gap: 40px; text-align: left; } }
+.joinTitle { margin: 0; font-family: var(--serif); font-weight: 400; font-size: 28px; color: #a8a199; }
+.vr { display: none; width: 1px; height: 48px; background: var(--line); }
+@media (min-width: 640px) { .vr { display: block; } }
+.joinLinks { display: flex; align-items: center; gap: 32px; font-family: var(--sans); font-size: clamp(20px, 2vw, 26px); font-weight: 500; letter-spacing: -0.02em; }
+
+/* Underline that wipes away and back on hover */
+.link { color: inherit; text-decoration: none; background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat; padding-bottom: 3px; transition: background-size 0.45s cubic-bezier(0.22, 1, 0.36, 1), color 0.2s ease; }
+.link:hover { background-size: 0 1px; background-position: 100% 100%; }
+.joinLinks .link { color: var(--ink); }
+.joinLinks .link:hover { color: #9a7631; }
+
+/* ---- 6. What makes us, us ---- */
+.valueCards { list-style: none; margin: 64px 0 0; padding: 0; display: grid; column-gap: 32px; row-gap: 56px; }
+@media (min-width: 640px) { .valueCards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1024px) { .valueCards { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.valueCard h3 { margin: 0; font-family: var(--sans); font-size: 26px; font-weight: 500; letter-spacing: -0.03em; color: var(--ink); }
+.frameBox { position: relative; margin-top: 24px; aspect-ratio: 4 / 5; }
+.frame { position: absolute; inset: 8% 0; overflow: hidden; border-radius: 20px; transition: inset 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
+.frame img { transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
+@media (hover: hover) {
+    .valueCard:hover .frame { inset: 0; }
+    .valueCard:hover .frame img { transform: scale(1.06); }
+}
+.valuesBottom { margin-top: 96px; }
+@media (min-width: 1024px) { .valuesBottom { margin-top: 128px; } }
+.numbered { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 48px; }
+.numbered li { display: flex; gap: 20px; }
+@media (min-width: 640px) { .numbered li { gap: 32px; } }
+.num { flex-shrink: 0; width: 40px; padding-top: 4px; font-family: var(--serif); font-size: 22px; color: #a8a199; font-variant-numeric: tabular-nums; }
+@media (min-width: 640px) { .num { width: 56px; font-size: 26px; } }
+.numbered p { margin: 0; max-width: 46ch; font-family: var(--sans); font-size: 18px; line-height: 1.65; color: var(--ink); }
+.statement { margin: 0; font-family: var(--sans); font-size: clamp(24px, 2.4vw, 30px); font-weight: 500; line-height: 1.25; letter-spacing: -0.03em; color: var(--ink); }
+.statementText { margin: 24px 0 0; max-width: 48ch; font-family: var(--sans); font-size: 18px; line-height: 1.65; color: var(--ink2); }
+
+/* ---- 7. Privé banner (sticky, like the homepage hero) ---- */
+.banner { position: sticky; top: 0; z-index: 0; height: 100vh; height: 100svh; overflow: hidden; display: grid; place-items: center; background: #1a1814; }
+.bannerMedia { position: absolute; inset: 0; will-change: transform; }
+.bannerMark { position: relative; width: clamp(220px, 34vw, 520px); will-change: transform; }
+.bannerMark img { display: block; width: 100%; height: auto; }
+.whiteLogo { filter: brightness(0) invert(1); } /* gold SVG logo shown in white on this banner */
+.slideOver { position: relative; z-index: 1; }
+
+/* ---- 8. Contact (golden) ---- */
+.contact {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    color: #fff;
+    background: linear-gradient(135deg, #3f2d15 0%, #6e5130 34%, #a8823f 70%, #d8b76c 100%);
+}
+.contactMedia { position: absolute; inset: 0; opacity: 0.55; mix-blend-mode: luminosity; pointer-events: none; will-change: transform; }
+.contactImg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.contactShade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(35, 24, 9, 0.6) 0%, rgba(35, 24, 9, 0.25) 55%, rgba(35, 24, 9, 0) 100%); pointer-events: none; }
+.contactInner { position: relative; min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; justify-content: center; padding-top: 112px; padding-bottom: 112px; }
+.contactTitle { margin: 0; font-family: var(--serif); font-weight: 400; font-size: clamp(48px, 9vw, 128px); line-height: 0.95; letter-spacing: -0.02em; color: #fbf3df; }
+.contactTitle span { display: block; }
+.contactText { margin: 32px 0 0; max-width: 38ch; font-family: var(--sans); font-size: 18px; line-height: 1.65; color: rgba(255, 255, 255, 0.85); }
+.contactLink { display: inline-block; width: fit-content; margin-top: 40px; font-family: var(--sans); font-size: clamp(26px, 3.6vw, 48px); font-weight: 500; letter-spacing: -0.03em; color: #f0dca8; }
+.contactLink:hover { color: #fff; }
+
+@media (prefers-reduced-motion: reduce) {
+    .ring svg { animation: none; }
+    .frame, .frame img, .photo img { transition: none; }
+}

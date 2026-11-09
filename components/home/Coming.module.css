@@ -1,0 +1,50 @@
+/* Breaks out of the 900px text column: up to 1120px wide, centred on the page */
+.root { display: flex; flex-direction: column; gap: clamp(20px, 2.4vw, 28px); width: min(1120px, calc(100vw - 40px)); margin: clamp(48px, 6vw, 72px) 0 0 calc(50% - min(560px, 50vw - 20px)); text-align: left; }
+
+/* ---- Coming in 2027 card ---- */
+.card { position: relative; overflow: hidden; border-radius: 18px; border: 1px solid #efe5dc; background: #fbf7f3; padding-top: clamp(28px, 3.4vw, 40px); }
+.bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+.title { position: relative; display: flex; align-items: center; justify-content: center; gap: clamp(14px, 2vw, 24px); margin: 0; font-family: var(--serif); font-weight: 400; font-size: clamp(24px, 2.6vw, 32px); line-height: 1.2; color: #2c2e29; }
+.rule { width: clamp(40px, 7vw, 72px); height: 1px; background: rgba(44, 46, 41, 0.3); }
+
+/* Text sits in two centred columns; the outer columns leave the image edges (compass, book) visible */
+.grid { position: relative; display: grid; grid-template-columns: minmax(16px, 1fr) minmax(0, 420px) minmax(0, 420px) minmax(16px, 1fr); margin-top: clamp(22px, 2.6vw, 30px); }
+.item { grid-row: 1; grid-column: 2; padding: 0 clamp(24px, 3.4vw, 44px) clamp(26px, 3vw, 36px) 0; }
+.second { grid-column: 3; padding-left: clamp(24px, 3.4vw, 44px); padding-right: 0; border-left: 1px solid transparent; border-image: linear-gradient(180deg, rgba(176, 138, 62, 0), rgba(176, 138, 62, 0.45) 30%, rgba(176, 138, 62, 0.45) 70%, rgba(176, 138, 62, 0)) 1; }
+.itemTitle { margin: 0; font-family: var(--serif); font-weight: 400; font-size: clamp(24px, 2.4vw, 30px); line-height: 1.15; letter-spacing: -0.01em; color: #2c2e29; }
+.kicker { margin: clamp(14px, 1.6vw, 20px) 0 0; font-family: var(--serif); font-weight: 700; font-size: clamp(15px, 1.35vw, 18px); line-height: 1.35; color: #b08a3e; }
+.text { margin: 14px 0 0; max-width: 34ch; font-family: var(--sans); font-size: clamp(14px, 1.15vw, 15.5px); line-height: 1.45; color: #2b2b2b; }
+
+/* Grey strip along the bottom holding the two italic lines */
+.strip { grid-column: 1 / -1; grid-row: 2; background: linear-gradient(180deg, rgba(247, 238, 232, 0.88) 0%, rgba(242, 242, 242, 0.92) 100%); border-top: 1px solid rgba(236, 228, 220, 0.8); }
+.tagline { position: relative; grid-row: 2; margin: 0; padding: 18px clamp(24px, 3.4vw, 44px) 20px 0; font-family: var(--sans); font-style: italic; font-size: clamp(14px, 1.15vw, 15.5px); line-height: 1.45; color: #2b2b2b; }
+.firstTag { grid-column: 2; }
+.secondTag { grid-column: 3; padding-left: calc(clamp(24px, 3.4vw, 44px) + 1px); padding-right: 0; }
+
+/* ---- Privé Huddle ---- */
+.huddle { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: clamp(20px, 3.4vw, 44px); padding: clamp(24px, 3vw, 34px) clamp(24px, 4vw, 44px); border-radius: 18px; border: 1px solid #efe5dc; background: linear-gradient(180deg, #f7eee8 0%, #f2f2f2 100%); }
+@media (min-width: 681px) { .huddle { padding-left: max(clamp(24px, 4vw, 44px), calc(50% - 420px - 100px)); padding-right: max(clamp(24px, 4vw, 44px), calc(50% - 420px)); } }
+.icon { display: block; width: clamp(44px, 4.6vw, 56px); height: auto; }
+.huddleHead { display: flex; align-items: baseline; flex-wrap: wrap; column-gap: clamp(18px, 3vw, 36px); row-gap: 6px; }
+.huddleKicker { margin: 0; font-family: var(--sans); font-style: italic; font-size: clamp(14px, 1.15vw, 15.5px); line-height: 1.4; color: #b08a3e; }
+.huddleText { margin: 14px 0 0; font-family: var(--sans); font-size: clamp(15px, 1.35vw, 18px); line-height: 1.45; color: #2b2b2b; }
+
+/* ---- Phones: one column, each tagline under its own item ---- */
+@media (max-width: 680px) {
+    .root { width: auto; margin-left: 0; }
+    /* Phones: each item gets its own slice of the photo, Insights the left (compass), Papers the right (book),
+       under a soft cream veil so the text stays readable */
+    .bg { display: none; }
+    .item, .second { background: linear-gradient(180deg, rgba(251, 247, 243, 0.78) 0%, rgba(251, 247, 243, 0.86) 100%), var(--bg) left center / cover no-repeat; }
+    .second { background-position: 0 0, right center; }
+    .grid { grid-template-columns: 1fr; }
+    .strip { display: none; }
+    .item, .second { grid-column: 1; padding: 0 22px 16px; border-left: 0; }
+    .item { grid-row: 1; }
+    .item { padding-top: 22px; }
+    .second { grid-row: 3; padding: 26px 22px 16px; border-top: 1px solid rgba(176, 138, 62, 0.3); border-image: none; margin: 0; }
+    .tagline, .firstTag, .secondTag { grid-column: 1; padding: 14px 22px; background: linear-gradient(180deg, rgba(247, 238, 232, 0.9) 0%, rgba(242, 242, 242, 0.94) 100%); }
+    .firstTag { grid-row: 2; margin-bottom: 0; }
+    .secondTag { grid-row: 4; }
+    .huddle { grid-template-columns: 1fr; align-items: start; gap: 16px; }
+}
