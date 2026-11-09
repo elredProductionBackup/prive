@@ -233,7 +233,7 @@ export const EVENTS: PracticeEvent[] = [
         days: ["2026-11-13"],
         descLines: 6,
         description:
-            "Most managers who stall have not stopped performing. They still hit their numbers and their bosses still rely on them. What has changed is what the next level wants from them, and very few people say that out loud. This workshop is built on Sunder’s book Get Unstuck. Participants work on where they are stuck and spend most of the morning on live cases. They leave with a 90-day plan they have already tested on peers from other companies.",
+            "Most managers who stall have not stopped performing. They still hit their numbers and their bosses still rely on them. What has changed is what the next level wants from them, and very few people say that out loud. This workshop is built on Sunder’s book Get Unstuck. Participants work on where they are stuck and spend most of the afternoon on live cases. They leave with a 90-day plan they have already tested on peers from other companies.",
         sessions: [
             {
                 date: "13th November 2026",
