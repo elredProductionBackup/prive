@@ -12,7 +12,7 @@ import { AFFILIATION_NOTE, MEMBERSHIP_NOTE, NOT_LIST, NOT_NOTE } from "@/content
 
 export const metadata: Metadata = pageMetadata({ title: HOME_TITLE, description: DEFAULT_DESCRIPTION, path: "/" })
 
-// 9 Nov
+// 9 Nov 2026
 export default function Home() {
     return (
         <>
