@@ -368,7 +368,7 @@ export const EVENTS: PracticeEvent[] = [
             { date: "28th November", label: BOARD, register: "https://forms.gle/W7T6EZyCJs1rxoPm7" },
         ],
         location: LOCATION,
-        media: { type: "video", src: `${CLD}/video/upload/v1787223148/Movie_on_7-25-26_at_9.07_AM_qz8cfz.mov`, poster: JONATHAN },
+        media: { type: "video", src: `${CLD}/video/upload/v1793590416/WhatsApp_Video_2026-10-28_at_19.12.05_1_mpdru3.mp4`, poster: JONATHAN },
         speaker: {
             name: "Jonathan Levav",
             photo: JONATHAN,
