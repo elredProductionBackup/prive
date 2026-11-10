@@ -253,7 +253,7 @@ export const EVENTS: PracticeEvent[] = [
             linkedin: "https://www.linkedin.com/in/sundertrg/",
         },
         popupDate: "13th November 2026",
-        time: "2:00 PM - 5:00 PM",
+        time: "2:00 PM - 5:30 PM",
         takeaways: [
             "A clear read on which of the six capabilities is holding you back right now.",
             "A way to build visibility with senior leaders that does not feel like self-promotion.",
