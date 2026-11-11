@@ -4,7 +4,7 @@ import type { Metadata } from "next"
 export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://theprive.network"
 export const SITE_NAME = "Privé"
 export const DEFAULT_DESCRIPTION = "A network designed to elevate good teams into great ones, with a single focus: to bring measurable change to your business."
-export const DEFAULT_OG = "https://res.cloudinary.com/dtrv7p3gg/image/upload/v1794216554/Thumbnail_5_1_kugygt.png"
+export const DEFAULT_OG = "https://res.cloudinary.com/dtrv7p3gg/image/upload/v1794399734/OG-Prive_zivi7s.png"
 
 // Descriptive name so the brand isn't confused with the TV channel or luxury labels called Privé
 export const HOME_TITLE = "Privé"
