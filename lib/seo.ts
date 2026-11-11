@@ -1,10 +1,14 @@
 import type { Metadata } from "next"
 
-// Set NEXT_PUBLIC_SITE_URL in production if the domain differs
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://theprive.network"
+// Must match the final URL the site lands on (theprive.network redirects to www),
+// otherwise og:url / canonical point at a redirect and WhatsApp drops the preview.
+// If you set NEXT_PUBLIC_SITE_URL in production, it must also be https://www.theprive.network
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.theprive.network"
 export const SITE_NAME = "Privé"
 export const DEFAULT_DESCRIPTION = "A network designed to elevate good teams into great ones, with a single focus: to bring measurable change to your business."
-export const DEFAULT_OG = "https://res.cloudinary.com/dtrv7p3gg/image/upload/v1794399734/OG-Prive_zivi7s.png"
+
+// Served as JPG at exactly 1200x630 via Cloudinary (no transparency, small file, works on WhatsApp)
+export const DEFAULT_OG = "https://res.cloudinary.com/dtrv7p3gg/image/upload/f_jpg,q_80,w_1200,h_630,c_fill/v1794399734/OG-Prive_zivi7s.png"
 
 // Descriptive name so the brand isn't confused with the TV channel or luxury labels called Privé
 export const HOME_TITLE = "Privé"
@@ -24,7 +28,7 @@ export function pageMetadata({ title, description, path, image = DEFAULT_OG }: {
             url: path,
             title: fullTitle,
             description,
-            images: [{ url: image, width: 1200, height: 630, alt: fullTitle }],
+            images: [{ url: image, width: 1200, height: 630, alt: fullTitle, type: "image/jpeg" }],
         },
         twitter: { card: "summary_large_image", title: fullTitle, description, images: [image] },
     }
