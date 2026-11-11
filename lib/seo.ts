@@ -7,8 +7,8 @@ export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.thepriv
 export const SITE_NAME = "Privé"
 export const DEFAULT_DESCRIPTION = "A network designed to elevate good teams into great ones, with a single focus: to bring measurable change to your business."
 
-// Served as JPG at exactly 1200x630 via Cloudinary (no transparency, small file, works on WhatsApp)
-export const DEFAULT_OG = "https://res.cloudinary.com/dtrv7p3gg/image/upload/f_jpg,q_80,w_1200,h_630,c_fill/v1794399734/OG-Prive_zivi7s.png"
+// Original PNG, served as-is (1200x630, ~160 KB, no transparency)
+export const DEFAULT_OG = "https://res.cloudinary.com/dtrv7p3gg/image/upload/v1794399734/OG-Prive_zivi7s.png"
 
 // Descriptive name so the brand isn't confused with the TV channel or luxury labels called Privé
 export const HOME_TITLE = "Privé"
