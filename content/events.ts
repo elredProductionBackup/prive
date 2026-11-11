@@ -397,7 +397,7 @@ export const EVENTS: PracticeEvent[] = [
             { date: "17th December", label: "Mumbai" },
         ],
         hideViewDetails: true,
-        media: { type: "image", src: NAVIN },
+        media: { type: "video", src: `${CLD}/video/upload/v1794386172/WhatsApp_Video_2026-11-10_at_17.26.39_nwmrbb.mp4`, poster: NAVIN },
         speaker: {
             name: "Navin Chander",
             photo: NAVIN,
