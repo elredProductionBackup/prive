@@ -423,7 +423,7 @@ export const EVENTS: PracticeEvent[] = [
             { date: "9th January", label: BOARD },
         ],
         location: LOCATION,
-        media: { type: "video", src: `${CLD}/video/upload/v1788434232/Danny_short_video_zk2pt3.mov`, poster: DANNY },
+        media: { type: "video", src: `${CLD}/video/upload/v1794488595/danny_india_reel_lppo9j.mp4`, poster: DANNY },
         speaker: {
             name: "Danny Warshay",
             photo: DANNY,
