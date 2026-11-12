@@ -56,8 +56,8 @@ export const ABOUT = {
             { name: "Ananya", role: "Admin", image: `${CLD}/v1793436224/ananya_rptt2l.png` },
         ],
         joinTitle: "Join the Team",
-        careersHref: "mailto:info@theprive.network?subject=Careers%20at%20Priv%C3%A9",
-        contactHref: "mailto:info@theprive.network",
+        careersHref: "/contact",
+        contactHref: "/contact",
     },
     values: {
         title: "What makes us, us",
@@ -83,7 +83,7 @@ export const ABOUT = {
         title: ["Let’s create", "something", "remarkable"],
         text: "If you’re interested in any form of collaboration, please send us an email and we’ll get back shortly.",
         linkLabel: "Contact us",
-        href: "mailto:info@theprive.network?subject=Collaboration%20with%20Priv%C3%A9",
+        href: "/contact",
         image: `${CLD}/v1793436947/ballbg_htdevg.webp`,
     },
 }

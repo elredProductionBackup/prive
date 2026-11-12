@@ -21,7 +21,7 @@ export const NAV: NavItem[] = [
     { label: "Operating Philosophy", action: "modal:philosophy" },
     { label: "Huddle", href: "/work/huddle" },
     { label: "FAQ", action: "modal:faq" },
-    { label: "Contact", href: "mailto:info@theprive.network" },
+    { label: "Contact", href: "/contact" },
 ]
 
 
@@ -131,7 +131,7 @@ export const FAQ = {
         },
     ],
     footerPrompt: "Anything we left out?",
-    footerLink: { label: "contact us", href: "mailto:info@theprive.network?subject=A%20question%20about%20Priv%C3%A9" },
+    footerLink: { label: "contact us", href: "/contact" },
 }
 
 // Operating Philosophy popup: a heading on the left, short paragraphs on the right

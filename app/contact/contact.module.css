@@ -1,0 +1,130 @@
+/* Contact page: dark warm band with a gold glow (like the 404 page). Copy on the left, ways to reach us on the right. */
+.main {
+    --ink: #1c1917;
+    --ink2: #57534e;
+    --ink3: #8f8a83;
+    --line: #ece6de;
+    --gold: #c9a14a;
+    --gold-soft: #f0dca8;
+    --wa: #25d366;
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    color: #fff;
+    background: linear-gradient(160deg, #2a2118 0%, #1a1511 55%, #15110d 100%);
+    font-family: var(--sans);
+}
+.glow {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+        radial-gradient(60% 55% at 12% 8%, rgba(201, 161, 74, 0.22), transparent 70%),
+        radial-gradient(55% 60% at 95% 100%, rgba(168, 130, 63, 0.18), transparent 70%);
+}
+
+.wrap {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: clamp(128px, 14vw, 184px) clamp(20px, 4vw, 56px) clamp(72px, 9vw, 128px);
+    display: grid;
+    gap: clamp(48px, 6vw, 88px);
+}
+@media (min-width: 1024px) {
+    .wrap { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; min-height: 100vh; min-height: 100svh; }
+}
+
+/* ---- Left ---- */
+.eyebrow { margin: 0; font-size: 13px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.14em; color: var(--gold); }
+.title { margin: 20px 0 0; font-family: var(--serif); font-weight: 400; font-size: clamp(46px, 5.2vw, 80px); line-height: 1; letter-spacing: -0.02em; color: #fbf3df; }
+.title span { display: block; }
+.intro { margin: 28px 0 0; max-width: 40ch; font-size: clamp(16px, 1.35vw, 18px); line-height: 1.65; color: rgba(255, 255, 255, 0.72); }
+.office { margin-top: clamp(40px, 5vw, 56px); padding-top: 20px; max-width: 420px; border-top: 1px solid rgba(255, 255, 255, 0.12); }
+.office .label { color: rgba(255, 255, 255, 0.45); }
+.office address { margin-top: 10px; font-style: normal; font-size: 16px; line-height: 1.55; color: rgba(255, 255, 255, 0.85); max-width: 34ch; }
+
+.label { display: block; margin: 0; font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.12em; color: var(--ink3); }
+
+/* ---- Right: channel cards ---- */
+.channels { display: flex; flex-direction: column; gap: 16px; }
+
+.card {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-areas: "icon body" "icon cta";
+    column-gap: clamp(18px, 2vw, 26px);
+    row-gap: 20px;
+    padding: clamp(24px, 3vw, 36px);
+    border-radius: clamp(20px, 2vw, 26px);
+    background: #fff;
+    color: var(--ink);
+    text-decoration: none;
+    box-shadow: 0 30px 70px -36px rgba(0, 0, 0, 0.6);
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.card:hover { transform: translateY(-4px); box-shadow: 0 40px 80px -36px rgba(0, 0, 0, 0.75); }
+
+.icon { grid-area: icon; display: grid; place-items: center; width: 54px; height: 54px; border-radius: 16px; background: #f6f1e8; color: #7a5c35; }
+.waIcon { background: var(--wa); color: #fff; }
+.cardBody { grid-area: body; display: flex; flex-direction: column; min-width: 0; }
+.value { margin-top: 8px; font-size: clamp(24px, 2.5vw, 34px); font-weight: 500; line-height: 1.15; letter-spacing: -0.03em; color: var(--ink); overflow-wrap: anywhere; }
+.text { margin-top: 10px; max-width: 42ch; font-size: 15px; line-height: 1.55; color: var(--ink2); }
+
+.cta {
+    grid-area: cta;
+    justify-self: start;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    height: 46px;
+    padding: 0 22px;
+    border-radius: 999px;
+    border: 1px solid #ddd3c4;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+    transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+.cta svg { transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1); }
+.card:hover .cta { background: var(--ink); border-color: var(--ink); color: #fff; }
+.card:hover .cta svg { transform: translateX(3px); }
+
+/* WhatsApp card gets the gold button so it reads as the main action */
+.wa .cta { border: 0; color: #fff; background: linear-gradient(135deg, #3f2d15 0%, #7a5c35 45%, #a8823f 100%); box-shadow: 0 10px 24px -10px rgba(122, 92, 53, 0.7); }
+.wa:hover .cta { background: linear-gradient(135deg, #3f2d15 0%, #7a5c35 45%, #a8823f 100%); color: #fff; }
+
+/* ---- Socials ---- */
+.follow { margin-top: 12px; padding-top: 24px; border-top: 1px solid rgba(255, 255, 255, 0.12); }
+.follow .label { color: rgba(255, 255, 255, 0.45); }
+.social { list-style: none; margin: 16px 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+@media (min-width: 640px) { .social { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.social a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 54px;
+    padding: 0 16px;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(255, 255, 255, 0.03);
+    color: rgba(255, 255, 255, 0.88);
+    font-size: 15px;
+    text-decoration: none;
+    transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+.social a svg { flex: none; color: var(--gold); transition: color 0.2s ease; }
+.social a:hover { border-color: var(--gold); background: rgba(201, 161, 74, 0.12); color: #fff; }
+.social a:hover svg { color: var(--gold-soft); }
+
+@media (max-width: 600px) {
+    .wrap { padding-left: 20px; padding-right: 20px; }
+    .card { grid-template-columns: 1fr; grid-template-areas: "icon" "body" "cta"; row-gap: 18px; }
+    .cta { width: 100%; justify-content: center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .card, .cta, .cta svg, .social a { transition: none; }
+    .card:hover { transform: none; }
+}

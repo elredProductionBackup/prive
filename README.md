@@ -16,8 +16,9 @@ npm run dev
 | `/work/huddle` | Huddle |
 | `/work/wider-perspective` | Wider Perspective |
 | `/governing-charter` | Governing Charter |
+| `/contact` | Contact (WhatsApp, email, socials) — copy in `content/contact.ts` |
 
-Qualification, FAQ and Operating Philosophy are popups. Contact is a mail link.
+Qualification, FAQ and Operating Philosophy are popups.
 `/governing-charter` reads its 16 sections from `content/charter.ts`.
 
 ## Scrolling and header

@@ -8,6 +8,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         { path: "/about", priority: 0.8, changeFrequency: "monthly" },
         { path: "/work/huddle", priority: 0.7, changeFrequency: "monthly" },
         { path: "/work/wider-perspective", priority: 0.7, changeFrequency: "monthly" },
+        { path: "/contact", priority: 0.6, changeFrequency: "yearly" },
         { path: "/governing-charter", priority: 0.5, changeFrequency: "yearly" },
     ]
     const now = new Date()
