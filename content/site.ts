@@ -177,6 +177,8 @@ export const FOOTER = {
     social: [
         { label: "Youtube", href: "https://www.youtube.com/channel/UCvyMrdA8sR1RaCo4IodTwtQ" },
         { label: "LinkedIn", href: "https://www.linkedin.com/company/priv%C3%A9-2026/" },
+        { label: "Instagram", href: "https://www.instagram.com/theprive.network/" },
+        { label: "Facebook", href: "https://www.facebook.com/profile.php?id=61595293018007" },
         { label: "Email", href: "mailto:info@theprive.network?subject=I%20have%20a%20Question" },
     ] as NavItem[],
     office: "16, Yashodham Center, Film City Road, Goregaon (E), Mumbai 400063, Maharashtra, India",
