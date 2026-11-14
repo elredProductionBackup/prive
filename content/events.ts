@@ -5,6 +5,7 @@
 //   carousel     → true = also shown as a card in the "When" carousel
 //   sessions     → the date strip on the card (and popup). A `register` link on a session
 //                  gives that date its own button ("Register for 27 Nov").
+//   audience     → one "who it's for" line under the date strip on the carousel card
 //   register     → one form for the whole event (one "Register" button)
 //   teams        → dropdown items this shows under, or "all"
 //   kind "image" → shows a logo/name on the calendar and opens a poster-only popup
@@ -32,6 +33,7 @@ export type PracticeEvent = {
     titleLines?: number
     descLines?: number
     sessions?: Session[]
+    audience?: string
     location?: string
     register?: string
     sticker?: { src: string; alt: string }
@@ -87,10 +89,12 @@ const LOCATION = "Tata Classroom - Taj Lands End, Mumbai"
 const BOARD = "Founders | Promoters | Family board | Senior Leadership"
 
 const SUNDER = `${CLD}/image/upload/v1792401857/463301abf06fbe65eedae48292208ac66fe0c1c5_vpz4n3.png`
-const JITENDRA = `${CLD}/image/upload/v1792401857/7d1485710daa3a1d634c05577c71b776c97e3e49_ueh50q.png`
 const JONATHAN = `${CLD}/image/upload/v1792401855/jonathan_pbrrun.jpg`
 const NAVIN = `${CLD}/image/upload/v1792401858/dd3dcedf2628fafad7c69a64cbaabcb6742903ee_joei3r.png`
 const DANNY = `${CLD}/image/upload/v1793085102/a05d599a1f99a63b30bc49c51d96f49c1326b83a_2_q8er7g.jpg`
+
+const JONATHAN_INTRO =
+    "Innovation is at the core of both the survival and growth of any business. Despite its importance, incumbent firms struggle to innovate for various reasons, including mindset, culture, inadequate processes, limited resources, or lack of tools (or a combination thereof). In this seminar, I will lead a discussion on the need to innovate, where to look for market opportunities, how to set up a well-oiled innovation process in your organization, and how a simple set of tools can turn your organization into an innovation machine (all that remains is execution!)."
 
 export const EVENTS: PracticeEvent[] = [
     /* ───────────── Past ───────────── */
@@ -223,11 +227,9 @@ export const EVENTS: PracticeEvent[] = [
             { title: "The Buyer Decision Map", text: ["Turn customer evidence into a sharper Brand Sentence for your business."] },
         ],
     },
-
-    /* ───────────── Upcoming ───────────── */
     {
+        // Completed - stays on the month calendar (greyed out), no longer in "What's next"
         id: "get-unstuck",
-        carousel: true,
         title: "Get Unstuck: Breaking Through the Middle Management Plateau",
         teams: ["Sales Team", "Marketing Team", "Operations & Supply Chain", "HR Team"],
         days: ["2026-11-13"],
@@ -243,7 +245,6 @@ export const EVENTS: PracticeEvent[] = [
         ],
         location: LOCATION,
         register: "https://forms.gle/62eAcSAT5VfYNbCq8",
-        // sticker: { src: `${CLD}/image/upload/v1793167433/registration-sticker_ag11c9.png`, alt: "Registration closes on Nov 8" },
         media: { type: "video", src: `${CLD}/video/upload/v1793093267/WhatsApp_Video_2026-10-21_at_15.37.37_zwxvgr.mp4`, poster: SUNDER },
         speaker: {
             name: "Sunder Ramachandran",
@@ -309,50 +310,8 @@ export const EVENTS: PracticeEvent[] = [
             },
         ],
     },
-    {
-        id: "plans-to-performance",
-        carousel: true,
-        title: "From Plans to Performance - Collaborative Decision-Making through S&OP and S&OE",
-        teams: ["Operations & Supply Chain", "Sales Team", "Leadership & Founders"],
-        days: ["2026-11-20"],
-        description:
-            "The session combines an overview of the supply chain planning pyramid, practical S&OP and S&OE frameworks, a business case, and the experiential Supply Chain Planning Game. Participants will explore how planning decisions, information sharing and cross-functional collaboration influence end-to-end supply chain performance.",
-        popupDescription:
-            "**An Interactive, Practice-Oriented Session**\nThe session combines an overview of the supply chain planning pyramid, practical S&OP and S&OE frameworks, a business case, and the experiential Supply Chain Planning Game. Participants will explore how planning decisions, information sharing and cross-functional collaboration influence end-to-end supply chain performance. Session will be interactive and experiential, that involves interesting and engaging activities to provoke practical learning and actionable take-aways, instead of being just a concept delivery through classroom lecture.",
-        sessions: [
-            {
-                date: "20th November",
-                label: "Teams",
-                text: "for Heads of Supply Chain, Planning, Logistics, Procurement or Operations, Planning, Plant and Materials Managers, and Sales, Customer Service, Finance, Strategy or P&L Leaders, along with VPs and SVPs",
-            },
-        ],
-        location: LOCATION,
-        register: "https://forms.gle/itCGVmS6MopqVqz38",
-        media: { type: "video", src: `${CLD}/video/upload/v1793160225/Jitendra_Kachhawa_Prive_reel_pmpfpm.mp4`, poster: JITENDRA },
-        speaker: {
-            name: "Jitendra Kachhawa",
-            photo: JITENDRA,
-            role: "18+ years McKinsey Supply chain expert",
-            calRole: "Ex-McKinsey Associate Partner",
-            roleFull: "18+ years supply chain experience in Management Consulting | Senior Director - Optilogic | Ex-McKinsey Associate Partner",
-            linkedin: "https://www.linkedin.com/in/jits10/",
-        },
-        popupDate: "20th November",
-        time: "2:00 PM - 6:00 PM",
-        takeaways: [
-            "**Understand the Supply Chain Planning Pyramid** - Connect Long-Range Planning (LRP), Sales & Operations Planning (S&OP), Sales & Operations Execution (S&OE), and daily execution into an integrated planning and decision-making framework. Understand how cross-functional collaboration and joint decision-making can improve business performance and reduce functional silos.",
-            "**Understand the Mechanics** - Learn the key steps, review cadence, roles, inputs, outputs, and management decisions required to make S&OP effective, and learn how to identify operational exceptions through S&OE, resolve supply-demand mismatches, manage changing priorities, and protect customer service through timely decisions.",
-            "**Identify Practical Next Steps for Your Organisation** - Take away actionable ideas to strengthen planning discipline and implement fit-for-purpose S&OP and S&OE practices within your business, and convert planning insights into business advantage.",
-        ],
-        modulesTitle: "Session",
-        moduleLabel: "Session",
-        modules: [
-            { title: "Supply chain Planning Pyramid", text: ["Overview of design of planning pyramid cascading into long, mid and short term horizons; underlying processes & their objectives; relevance for MSMEs; a glimpse into SC planning tech and solutions"] },
-            { title: "Supply Chain Planning Game", text: ["Play the supply chain planning game; learn important concepts of collaborative planning; importance of information transparency and trust across the chain"] },
-            { title: "Deep dive into S&OP and S&OE", text: ["Understanding where S&OP and S&OE are similar but differ into their objectives, application, approach and decisions that are taken - learn the mechanics of both; guiding principles and best practices"] },
-            { title: "Collaborative Decision Making - Practice Case", text: ["Use sample case to apply concepts of S&OP/S&OE, understand the supply-demand equation, analyze trade-offs to fill the gaps; practice the art of collaborative decision making"] },
-        ],
-    },
+
+    /* ───────────── Upcoming ───────────── */
     {
         id: "jonathan-levav",
         carousel: true,
@@ -362,9 +321,10 @@ export const EVENTS: PracticeEvent[] = [
         calTitle: "Stanford Business School",
         calSubtitle: "Prof. Jonathan Levav",
         description:
-            "Innovation is at the core of both the survival and growth of any business. Despite its importance, incumbent firms struggle to innovate for various reasons, including mindset, culture, inadequate processes, limited resources, or lack of tools (or a combination thereof). In this seminar, I will lead a discussion on the need to innovate, where to look for market opportunities, how to set up a well-oiled innovation process in your organization, and how a simple set of tools can turn your organization into an innovation machine (all that remains is execution!). Next, once you've developed your innovation, we will discuss principles of the psychology of decision making so that you can design decision environments that promote the selection of your innovation.",
+            JONATHAN_INTRO +
+            " Next, once you've developed your innovation, we will discuss principles of the psychology of decision making so that you can design decision environments that promote the selection of your innovation.",
         sessions: [
-            { date: "27th November", label: "Teams", register: "https://forms.gle/PJsyxN4m98d4NrtZ8" },
+            { date: "27th November", label: "Teams", text: "Sales & Strategy Leaders, Directors & CXOs", register: "https://forms.gle/PJsyxN4m98d4NrtZ8" },
             { date: "28th November", label: BOARD, register: "https://forms.gle/W7T6EZyCJs1rxoPm7" },
         ],
         location: LOCATION,
@@ -377,6 +337,45 @@ export const EVENTS: PracticeEvent[] = [
             tagline: "Understanding consumer’s judgments and choices by using tools from experimental psychology and behavioural economics.",
         },
         popupTitle: "Stanford Business School",
+        popupDate: "27th & 28th November",
+        time: "9:30 AM - 4:00 PM",
+        takeaways: [
+            "Where your market opportunities await",
+            "Concrete toolkit for creative ideation",
+            "The limits and powers of the human mind",
+            "Tips on influencing choices",
+        ],
+        modules: [
+            {
+                title: "How to Find Market Opportunities and Solve Them Creatively",
+                time: "9:30 AM - 10:50 AM",
+                icon: "search",
+                text: [JONATHAN_INTRO],
+            },
+            { break: "Coffee Break", time: "10:50 AM - 11:10 AM" },
+            {
+                title: "How to Find Market Opportunities and Solve Them Creatively (Continued)",
+                time: "11:10 AM - 12:30 PM",
+                icon: "search",
+                text: ["*This is a continuation of the previous module.*"],
+            },
+            { break: "Lunch Break", time: "12:30 PM - 1:30 PM" },
+            {
+                title: "Choice Architecture: Become a Decision Designer",
+                time: "1:30 PM - 2:50 PM",
+                icon: "target",
+                text: [
+                    "In this pair of sessions I will discuss basic principles of choice architecture. I will share the psychological principles that you can leverage to design decision environments that increase the likelihood that an alternative will be chosen. Instead of investing resources in trying to convince people to choose an option, we will discuss (free!) ways to design the decision situation to achieve the outcome you'd like.",
+                ],
+            },
+            { break: "Coffee Break", time: "2:50 PM - 3:10 PM" },
+            {
+                title: "Choice Architecture: Become a Decision Designer (Continued)",
+                time: "3:10 PM - 4:00 PM",
+                icon: "search",
+                text: ["*This is a continuation of the previous module.*"],
+            },
+        ],
     },
     {
         id: "seeing-past-the-order",
@@ -396,6 +395,7 @@ export const EVENTS: PracticeEvent[] = [
             { date: "16th December", label: "Mumbai" },
             { date: "17th December", label: "Delhi" },
         ],
+        audience: "For leaders and managers in supply chain, distribution, procurement, planning and sales operations at consumer product companies.",
         hideViewDetails: true,
         media: { type: "video", src: `${CLD}/video/upload/v1794386172/WhatsApp_Video_2026-11-10_at_17.26.39_nwmrbb.mp4`, poster: NAVIN },
         speaker: {

@@ -118,19 +118,35 @@ function SessionStrip({ ev, isMobile }: { ev: PracticeEvent; isMobile: boolean }
         </div>
     )
 
-    if (!multi) return <div style={{ marginTop: isMobile ? 18 : 26, padding: isMobile ? "0 8px" : 0 }}>{cell(sessions[0], 0)}</div>
+    // One "who it's for" line under the whole strip (e.g. multi-city runs)
+    const audience = ev.audience ? (
+        <p style={{ margin: `${isMobile ? 14 : 20}px auto 0`, maxWidth: 560, padding: isMobile ? "0 8px" : 0, textAlign: "center", fontSize: isMobile ? 11.5 : 12.5, fontWeight: 600, lineHeight: 1.5 }}>
+            {ev.audience}
+        </p>
+    ) : null
+
+    if (!multi)
+        return (
+            <div style={{ marginTop: isMobile ? 18 : 26, padding: isMobile ? "0 8px" : 0 }}>
+                {cell(sessions[0], 0)}
+                {audience}
+            </div>
+        )
     return (
-        <div
-            style={{
-                display: "grid",
-                gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`,
-                rowGap: stacked ? 16 : 18,
-                maxWidth: stacked ? 320 : sessions.length === 2 ? 780 : 860,
-                margin: `${isMobile ? 18 : 30}px auto 0`,
-            }}
-        >
-            {sessions.map(cell)}
-        </div>
+        <>
+            <div
+                style={{
+                    display: "grid",
+                    gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`,
+                    rowGap: stacked ? 16 : 18,
+                    maxWidth: stacked ? 320 : sessions.length === 2 ? 780 : 860,
+                    margin: `${isMobile ? 18 : 30}px auto 0`,
+                }}
+            >
+                {sessions.map(cell)}
+            </div>
+            {audience}
+        </>
     )
 }
 
