@@ -4,7 +4,7 @@
 export const HERO = {
     image: "https://res.cloudinary.com/dtrv7p3gg/image/upload/v1794213629/43168dd339358ec0fdb57435a65d36e45ff00e49_1_fil5hr.png",
     alt: "Four climbers roped together on a snowy ridge at sunrise, high above a sea of clouds",
-    title: "No one climbs alone", // Mencken Std, shown in capitals
+    title: "No One Climbs Alone", // Mencken Std, shown in capitals
     sub: "every summit is reached as a team", // Mencken Std Head, italic
 }
 
