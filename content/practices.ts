@@ -43,7 +43,7 @@ export const SPEAKERS: Person[] = [
 
 export const LEADERS: Person[] = [
     { kind: "photo", name: "Sunder Ramachandran", subtitle: "Author | Executive Educator", month: "NOVEMBER 2026", upcoming: true, image: `${CDN}/v1793352435/463301abf06fbe65eedae48292208ac66fe0c1c5_vpz4n3_zv2xgk.png` },
-    { kind: "photo", name: "Jitendra Kachhawa", subtitle: "18+ years McKinsey Supply chain expert", month: "NOVEMBER 2026", upcoming: true, image: `${CDN}/v1792401857/7d1485710daa3a1d634c05577c71b776c97e3e49_ueh50q.png` },
+    // { kind: "photo", name: "Jitendra Kachhawa", subtitle: "18+ years McKinsey Supply chain expert", month: "NOVEMBER 2026", upcoming: true, image: `${CDN}/v1792401857/7d1485710daa3a1d634c05577c71b776c97e3e49_ueh50q.png` },
     { kind: "photo", name: "Navin Chander", subtitle: "12+ years of experience at Walmart", month: "DECEMBER 2026", upcoming: true, image: `${CDN}/v1792401858/dd3dcedf2628fafad7c69a64cbaabcb6742903ee_joei3r.png` },
 ]
 
