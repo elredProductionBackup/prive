@@ -5,8 +5,8 @@ import { AnimatePresence, motion } from "framer-motion"
 import { EVENTS, TEAMS, type PracticeEvent } from "@/content/events"
 import {
     ALL, ArrowButton, Avatar, C, EventModal, F, FadeImg, LinkedInIcon, PinIcon, RoleLine, TeamDropdown,
-    cldImage, cldVideo, clamp, inline, linkProps, matchesTeam, normKey, registerTargets, resetButton,
-    shareEvent, shortDate, useContainerWidth, useShareParam, type TeamOption,
+    cldImage, cldVideo, clamp, inline, matchesTeam, normKey, resetButton,
+    shareEvent, useContainerWidth, useShareParam, type TeamOption,
 } from "./ui"
 
 const PARAM = "event"
@@ -152,26 +152,12 @@ function SessionStrip({ ev, isMobile }: { ev: PracticeEvent; isMobile: boolean }
 
 /* ───────────── Card ───────────── */
 
-function RegisterRow({ ev, isMobile, sticker }: { ev: PracticeEvent; isMobile: boolean; sticker?: PracticeEvent["sticker"] }) {
-    const targets = registerTargets(ev)
-    if (!targets.length && !sticker) return null
-    const multi = targets.length > 1
+// Mobile sticker under the card text. Registering happens only in the popup ("I am Interested").
+function StickerRow({ isMobile, sticker }: { isMobile: boolean; sticker?: PracticeEvent["sticker"] }) {
+    if (!sticker) return null
     return (
-        <div style={{ position: "relative", marginTop: isMobile ? 18 : 22, display: "flex", flexWrap: "wrap", alignItems: "center", gap: 10, minHeight: sticker ? 44 : undefined }}>
-            {targets.map((t) => (
-                <motion.a
-                    key={t.url}
-                    {...linkProps(t.url)}
-                    whileHover={{ backgroundColor: C.brown, color: "#FFFFFF" }}
-                    whileTap={{ scale: 0.97 }}
-                    style={{ display: "inline-flex", alignItems: "center", padding: isMobile ? "7px 22px" : "8px 30px", borderRadius: 999, border: `1.5px solid ${C.brown}`, color: C.text, fontSize: isMobile ? 16 : 17, lineHeight: 1.25, textDecoration: "none", whiteSpace: "nowrap" }}
-                >
-                    {multi && t.date ? `Register for ${shortDate(t.date)}` : "Register"}
-                </motion.a>
-            ))}
-            {sticker && (
-                <img src={cldImage(sticker.src, 600)} alt={sticker.alt} draggable={false} style={{ position: "absolute", right: 0, top: "50%", width: 132, transform: "translateY(-50%)", pointerEvents: "none", zIndex: 3 }} />
-            )}
+        <div style={{ position: "relative", marginTop: isMobile ? 18 : 22, minHeight: 44 }}>
+            <img src={cldImage(sticker.src, 600)} alt={sticker.alt} draggable={false} style={{ position: "absolute", right: 0, top: "50%", width: 132, transform: "translateY(-50%)", pointerEvents: "none", zIndex: 3 }} />
         </div>
     )
 }
@@ -205,7 +191,7 @@ function EventCard({ ev, isMobile, isTablet, onOpen }: { ev: PracticeEvent; isMo
                     <span>{ev.location}</span>
                 </div>
             )}
-            <RegisterRow ev={ev} isMobile={isMobile} sticker={isMobile ? ev.sticker : undefined} />
+            <StickerRow isMobile={isMobile} sticker={isMobile ? ev.sticker : undefined} />
         </div>
     )
 

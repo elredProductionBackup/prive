@@ -10,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         { path: "/work/wider-perspective", priority: 0.7, changeFrequency: "monthly" },
         { path: "/contact", priority: 0.6, changeFrequency: "yearly" },
         { path: "/governing-charter", priority: 0.5, changeFrequency: "yearly" },
+        { path: "/privacy-policy", priority: 0.3, changeFrequency: "yearly" },
     ]
     const now = new Date()
     return pages.map((p) => ({ url: `${SITE_URL}${p.path === "/" ? "" : p.path}`, lastModified: now, changeFrequency: p.changeFrequency, priority: p.priority }))

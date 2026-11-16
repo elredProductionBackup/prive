@@ -17,6 +17,7 @@ npm run dev
 | `/work/wider-perspective` | Wider Perspective |
 | `/governing-charter` | Governing Charter |
 | `/contact` | Contact (WhatsApp, email, socials) — copy in `content/contact.ts` |
+| `/privacy-policy` | Privacy Policy — text in `content/privacy.ts` |
 
 Qualification, FAQ and Operating Philosophy are popups.
 `/governing-charter` reads its 16 sections from `content/charter.ts`.
@@ -61,3 +62,31 @@ are self-hosted from `app/fonts/` via `next/font/local` (`app/fonts.ts`).
 - `/?event=get-unstuck` opens that card's popup in the When carousel
 - `/?session=oded-netzer` opens that session on the month calendar
 - `/#calendar` scrolls to the calendar (the Calendar button uses this from other pages)
+
+## Tracking (Google Tag Manager + Meta)
+
+- Google Tag Manager (`GTM-PN4B367L`) loads on every page from `app/layout.tsx` via `@next/third-parties`.
+  Add the Meta pixel and any other tags **inside GTM**, never in the site code, so nothing loads twice.
+- Meta domain verification tag (`facebook-domain-verification`) is in the root `metadata` in `app/layout.tsx`.
+
+## Request an invitation form
+
+The **I am Interested** button in each event popup opens the on-site form in
+`components/site/InvitationModal.tsx` (the carousel cards have no Register button; people open View Details first). It asks for name, email, phone, company (optional) and
+notes (optional); the request is recorded against that event, with no date picker.
+
+- Which events get the button: `register: true` on the event in `content/events.ts`.
+  Events with `hideViewDetails` have no popup, so no button
+- On a successful send it pushes to the GTM dataLayer:
+  `{ event: "invitation_request_submitted", practice_id, practice_name }` (no personal details)
+- Each request also carries the visitor's UTM tags / `fbclid` from the page they landed on, so it can be traced to its ad
+
+**Where submissions go** is set with environment variables on the host (see `.env.example`):
+
+- `INVITATION_WEBHOOK_URL` + `INVITATION_WEBHOOK_SECRET`: posts each request as JSON. The ready-made
+  Google Apps Script in `scripts/invitation-sheet.gs` adds a row to a Google Sheet and emails info@theprive.network
+  (setup steps at the top of that file). Zapier, Make or a CRM webhook work the same way.
+- `RESEND_API_KEY` (+ `INVITATION_EMAIL_TO`, `INVITATION_EMAIL_FROM`): emails each request via Resend.
+
+With neither set, the form works in `npm run dev` (requests are printed in the terminal) but **refuses requests on the
+live site** and asks the visitor to email instead, so nothing is silently lost.

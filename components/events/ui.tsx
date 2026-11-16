@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react"
 import { createPortal } from "react-dom"
 import { AnimatePresence, motion } from "framer-motion"
 import type { Module, Point, PracticeEvent } from "@/content/events"
-import { useScrollLock } from "@/lib/site"
+import { openInvitation, useScrollLock } from "@/lib/site"
 
 /* ───────────── Tokens ───────────── */
 
@@ -47,13 +47,19 @@ export function shortDate(s = "") {
 
 export const isImageKind = (ev: PracticeEvent) => ev.kind === "image"
 
-// One "Register" button for the event, or one per dated form
+// One "I am Interested" button per event (events marked `register: true`).
+// It opens the on-site invitation form (components/site/InvitationModal) for that event.
 export function registerTargets(ev: PracticeEvent) {
-    if (ev.register) return [{ url: toUrl(ev.register), date: "" }]
-    const seen = new Set<string>()
-    return (ev.sessions || [])
-        .filter((s) => s.register && !seen.has(s.register) && seen.add(s.register))
-        .map((s) => ({ url: toUrl(s.register), date: s.date }))
+    return ev.register ? [{ key: ev.id }] : []
+}
+
+// Opens the invitation form for this event
+export function requestInvitation(ev: PracticeEvent) {
+    const strip = (t = "") => t.replace(/\*+$/, "").trim()
+    const heading = strip(ev.speaker?.name || ev.calTitle || ev.title)
+    const subheading = strip(ev.popupTitle || ev.title)
+    const details = [popupDateText(ev), ev.location].filter(Boolean).join(" · ")
+    openInvitation({ eventId: ev.id, heading, subheading: subheading === heading ? "" : subheading, details })
 }
 
 export const ALL = "all"
@@ -249,7 +255,7 @@ const BreakIcon = ({ meal, color }: { meal: boolean; color: string }) => (
         />
     </svg>
 )
-const CloseIcon = () => (
+export const CloseIcon = () => (
     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden>
         <path d="M2.5 2.5l9 9M11.5 2.5l-9 9" stroke="#333" strokeWidth="1.7" strokeLinecap="round" />
     </svg>
@@ -627,7 +633,7 @@ export function TeamDropdown({
 
 /* ───────────── Popups ───────────── */
 
-const roundBtn: React.CSSProperties = {
+export const roundBtn: React.CSSProperties = {
     ...resetButton,
     height: 34,
     minWidth: 34,
@@ -649,7 +655,7 @@ const glass: React.CSSProperties = {
     boxShadow: "0 2px 10px rgba(0,0,0,0.12)",
 }
 
-function useViewportWidth() {
+export function useViewportWidth() {
     const [vw, setVw] = useState(1200)
     useEffect(() => {
         const f = () => setVw(window.innerWidth)
@@ -682,7 +688,7 @@ function useModal(onClose: () => void, onShare?: () => Promise<string>) {
     return { toast, share }
 }
 
-function Overlay({ children, onClose, padding }: { children: React.ReactNode; onClose: () => void; padding: number }) {
+export function Overlay({ children, onClose, padding, zIndex = 9999 }: { children: React.ReactNode; onClose: () => void; padding: number; zIndex?: number }) {
     return createPortal(
         <motion.div
             data-lenis-prevent=""
@@ -694,7 +700,7 @@ function Overlay({ children, onClose, padding }: { children: React.ReactNode; on
             style={{
                 position: "fixed",
                 inset: 0,
-                zIndex: 9999,
+                zIndex,
                 background: "rgba(22,20,18,0.72)",
                 display: "flex",
                 alignItems: "center",
@@ -709,7 +715,7 @@ function Overlay({ children, onClose, padding }: { children: React.ReactNode; on
     )
 }
 
-const panelMotion = {
+export const panelMotion = {
     initial: { opacity: 0, y: 24, scale: 0.985 },
     animate: { opacity: 1, y: 0, scale: 1 },
     exit: { opacity: 0, y: 16, scale: 0.985 },
@@ -763,17 +769,16 @@ function Toast({ text, bottom }: { text: string; bottom: number }) {
     )
 }
 
-// Footer button(s): the register form(s). Past sessions and events without a form get "Close".
+// Footer button(s): open the invitation form. Past sessions and events without a form get "Close".
 function Footer({ ev, past, onClose, pad, mobile }: { ev: PracticeEvent; past: boolean; onClose: () => void; pad: number; mobile: boolean }) {
     const targets = past ? [] : registerTargets(ev)
-    const multi = targets.length > 1
     const btn: React.CSSProperties = {
         ...resetButton,
-        height: multi ? 50 : 54,
+        height: 54,
         borderRadius: 999,
         background: C.accent,
         color: "#fff",
-        fontSize: multi ? 16 : 17,
+        fontSize: 17,
         fontWeight: 500,
         display: "flex",
         alignItems: "center",
@@ -785,9 +790,9 @@ function Footer({ ev, past, onClose, pad, mobile }: { ev: PracticeEvent; past: b
         <div style={{ flexShrink: 0, borderTop: "1px solid #EDEAE6", padding: `16px ${pad}px ${mobile ? 22 : 20}px`, background: "#fff", display: "flex", flexWrap: "wrap", gap: 10 }}>
             {targets.length ? (
                 targets.map((t) => (
-                    <motion.a key={t.url} {...linkProps(t.url)} whileTap={{ scale: 0.98 }} style={{ ...btn, flex: multi ? "1 1 220px" : "1 1 100%" }}>
-                        {multi && t.date ? `I am Interested for ${shortDate(t.date)}` : "I am Interested"}
-                    </motion.a>
+                    <motion.button key={t.key} type="button" onClick={() => requestInvitation(ev)} whileTap={{ scale: 0.98 }} style={{ ...btn, flex: "1 1 100%" }}>
+                        I am Interested
+                    </motion.button>
                 ))
             ) : (
                 <motion.button type="button" onClick={onClose} whileTap={{ scale: 0.98 }} style={{ ...btn, width: "100%" }}>
@@ -841,7 +846,8 @@ function ModuleList({ ev, mobile }: { ev: PracticeEvent; mobile: boolean }) {
                             </span>
                         </div>
                     )
-                const label = m.plain ? m.title : `${ev.moduleLabel || "Module"} ${++n}`
+                // A "continued" module keeps the number of the one before it
+                const label = m.plain ? m.title : `${ev.moduleLabel || "Module"} ${m.continued ? Math.max(n, 1) : ++n}`
                 const parts = [{ text: m.text, points: m.points }, ...(m.parts || [])] as { title?: string; text?: string[]; points?: Point[] }[]
                 return (
                     <div key={i} style={{ border: `1px solid ${C.line}`, borderRadius: 10, display: "flex", gap: 12, alignItems: "flex-start", padding: mobile ? "18px 16px" : 20 }}>
