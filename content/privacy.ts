@@ -102,11 +102,6 @@ export const PRIVACY: PrivacySection[] = [
         ],
     },
     {
-        id: "children",
-        title: "Children",
-        blocks: ["Privé is intended for adults. We don't knowingly collect information from anyone under 18."],
-    },
-    {
         id: "changes",
         title: "Changes to this policy",
         blocks: [`We may update this policy from time to time. The latest version will always be on this page with its "last updated" date.`],
