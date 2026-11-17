@@ -21,7 +21,7 @@ export const PRIVACY: PrivacySection[] = [
         title: "Introduction",
         blocks: [
             `This Privacy Policy explains how Privé (The Privé Network, "Privé", "we" or "us") collects, uses and protects personal information when you visit theprive.network, request an invitation to a Privé programme, or take part in the Privé Network as a Member or attendee.`,
-            `Privé is an invitation-only network built on trust, and confidentiality is one of its foundations. This policy should be read together with our Governing Charter, which sets out the confidentiality standards that apply to Member information within the Network.`,
+            // `Privé is an invitation-only network built on trust, and confidentiality is one of its foundations. This policy should be read together with our Governing Charter, which sets out the confidentiality standards that apply to Member information within the Network.`,
         ],
     },
     {
@@ -32,7 +32,7 @@ export const PRIVACY: PrivacySection[] = [
                 list: [
                     { lead: "Contact details:", text: "name, email address and phone number." },
                     { lead: "Professional details:", text: "company name, role or function, and anything you choose to tell us in the notes of a request or in a membership application." },
-                    { lead: "Invitation and event records:", text: "the programme and session you asked about, whether you were invited, your registration and attendance, and any fees paid. Card and bank details are handled by our bank or payment provider, not by us." },
+                    // { lead: "Invitation and event records:", text: "the programme and session you asked about, whether you were invited, your registration and attendance, and any fees paid. Card and bank details are handled by our bank or payment provider, not by us." },
                     { lead: "Membership information:", text: "details shared in the course of membership, including information about your enterprise and the colleagues or family members you nominate to attend, as allowed under our Governing Charter." },
                     { lead: "Technical and campaign data:", text: "IP address, device and browser type, pages viewed, and how you reached our website, such as the ad or campaign link you clicked, collected through cookies and similar technologies." },
                     { lead: "Communications:", text: "messages you send us, including by email and WhatsApp, and our replies." },
