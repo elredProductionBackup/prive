@@ -31,6 +31,20 @@ export function openModal(name: ModalName) {
     window.dispatchEvent(new CustomEvent(MODAL_EVENT, { detail: name }))
 }
 
+// "Register" / "I am Interested" buttons open the on-site invitation form
+// (components/site/InvitationModal). Build the request with requestInvitation() in components/events/ui.
+export type InvitationRequest = {
+    eventId: string
+    heading: string // speaker or event name, shown as the form title
+    subheading?: string // programme / school
+    details?: string // date and venue line
+}
+export const INVITATION_EVENT = "prive:invitation"
+
+export function openInvitation(request: InvitationRequest) {
+    window.dispatchEvent(new CustomEvent<InvitationRequest>(INVITATION_EVENT, { detail: request }))
+}
+
 export function NavLink({
     item,
     className,

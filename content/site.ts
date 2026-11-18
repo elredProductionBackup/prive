@@ -173,7 +173,10 @@ export const FOOTER = {
         { label: "About", href: "/about" },
         { label: "FAQ", action: "modal:faq" },
     ] as NavItem[],
-    colB: [{ label: "Governing Charter", href: "/governing-charter" }] as NavItem[],
+    colB: [
+        { label: "Governing Charter", href: "/governing-charter" },
+        { label: "Privacy Policy", href: "/privacy-policy" },
+    ] as NavItem[],
     social: [
         { label: "Youtube", href: "https://www.youtube.com/channel/UCvyMrdA8sR1RaCo4IodTwtQ" },
         { label: "LinkedIn", href: "https://www.linkedin.com/company/priv%C3%A9-2026/" },

@@ -3,21 +3,24 @@
 // Quick guide
 //   days         → ISO dates shown on the month calendar. Use range() for runs of days.
 //   carousel     → true = also shown as a card in the "When" carousel
-//   sessions     → the date strip on the card (and popup). A `register` link on a session
-//                  gives that date its own button ("Register for 27 Nov").
+//   sessions     → the date strip on the card (and popup)
 //   audience     → one "who it's for" line under the date strip on the carousel card
-//   register     → one form for the whole event (one "Register" button)
+//   register     → true = one "I am Interested" button in the popup. It opens the on-site
+//                  "Request an invitation" form for this event (name, email, phone, company,
+//                  notes). Buttons appear only in the popup, so an event with
+//                  hideViewDetails (no popup) gets no button.
 //   teams        → dropdown items this shows under, or "all"
 //   kind "image" → shows a logo/name on the calendar and opens a poster-only popup
+//   continued    → on a module: keeps the previous module's number ("Module 1" twice)
 //   **bold** and *italic* work in all text.
 
 export type Point = string | { letter?: string; label: string; text: string }
 export type ModulePart = { title?: string; text?: string[]; points?: Point[] }
 export type Module =
     | { break: string; time?: string }
-    | ({ title: string; time?: string; icon?: "chart" | "search" | "target"; plain?: boolean; outcome?: string; parts?: ModulePart[] } & ModulePart)
+    | ({ title: string; time?: string; icon?: "chart" | "search" | "target"; plain?: boolean; continued?: boolean; outcome?: string; parts?: ModulePart[] } & ModulePart)
 
-export type Session = { date: string; label?: string; text?: string; register?: string }
+export type Session = { date: string; label?: string; text?: string }
 
 export type PracticeEvent = {
     id: string
@@ -35,7 +38,7 @@ export type PracticeEvent = {
     sessions?: Session[]
     audience?: string
     location?: string
-    register?: string
+    register?: boolean
     sticker?: { src: string; alt: string }
     media?: { type: "image" | "video"; src: string; poster?: string }
     hideViewDetails?: boolean
@@ -244,7 +247,7 @@ export const EVENTS: PracticeEvent[] = [
             },
         ],
         location: LOCATION,
-        register: "https://forms.gle/62eAcSAT5VfYNbCq8",
+        register: true,
         media: { type: "video", src: `${CLD}/video/upload/v1793093267/WhatsApp_Video_2026-10-21_at_15.37.37_zwxvgr.mp4`, poster: SUNDER },
         speaker: {
             name: "Sunder Ramachandran",
@@ -324,10 +327,11 @@ export const EVENTS: PracticeEvent[] = [
             JONATHAN_INTRO +
             " Next, once you've developed your innovation, we will discuss principles of the psychology of decision making so that you can design decision environments that promote the selection of your innovation.",
         sessions: [
-            { date: "27th November", label: "Teams", text: "Sales & Strategy Leaders, Directors & CXOs", register: "https://forms.gle/PJsyxN4m98d4NrtZ8" },
-            { date: "28th November", label: BOARD, register: "https://forms.gle/W7T6EZyCJs1rxoPm7" },
+            { date: "27th November", label: "Teams", text: "Sales & Strategy Leaders, Directors & CXOs" },
+            { date: "28th November", label: BOARD },
         ],
         location: LOCATION,
+        register: true,
         media: { type: "video", src: `${CLD}/video/upload/v1793590416/WhatsApp_Video_2026-10-28_at_19.12.05_1_mpdru3.mp4`, poster: JONATHAN },
         speaker: {
             name: "Jonathan Levav",
@@ -355,6 +359,7 @@ export const EVENTS: PracticeEvent[] = [
             { break: "Coffee Break", time: "10:50 AM - 11:10 AM" },
             {
                 title: "How to Find Market Opportunities and Solve Them Creatively (Continued)",
+                continued: true,
                 time: "11:10 AM - 12:30 PM",
                 icon: "search",
                 text: ["*This is a continuation of the previous module.*"],
@@ -371,8 +376,9 @@ export const EVENTS: PracticeEvent[] = [
             { break: "Coffee Break", time: "2:50 PM - 3:10 PM" },
             {
                 title: "Choice Architecture: Become a Decision Designer (Continued)",
+                continued: true,
                 time: "3:10 PM - 4:00 PM",
-                icon: "search",
+                icon: "target",
                 text: ["*This is a continuation of the previous module.*"],
             },
         ],
@@ -423,6 +429,7 @@ export const EVENTS: PracticeEvent[] = [
             { date: "9th January", label: BOARD },
         ],
         location: LOCATION,
+        register: true,
         media: { type: "video", src: `${CLD}/video/upload/v1794488595/danny_india_reel_lppo9j.mp4`, poster: DANNY },
         speaker: {
             name: "Danny Warshay",
