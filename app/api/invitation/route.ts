@@ -1,16 +1,12 @@
 import { NextResponse } from "next/server"
 import { EVENTS } from "@/content/events"
 
-// Receives "Request an invitation" submissions from components/site/InvitationModal.tsx
-// and passes each one on to wherever Privé wants them. Set one or both in the hosting
-// environment (see .env.example and README):
+// Receives "I am Interested" / "Request an invitation" submissions from
+// components/site/InvitationModal.tsx and saves each one to the Google Sheet through the
+// Apps Script web app in scripts/invitation-sheet.gs. Set in the hosting environment:
 //
-//   INVITATION_WEBHOOK_URL  → posts the request as JSON (e.g. a Google Apps Script that adds a
-//                             row to a Google Sheet and emails info@theprive.network; see
-//                             scripts/invitation-sheet.gs). Also works with Zapier, Make, a CRM.
-//   RESEND_API_KEY          → emails each request via Resend (resend.com) to INVITATION_EMAIL_TO.
-//
-// The request counts as received if at least one of them accepts it.
+//   INVITATION_WEBHOOK_URL     → the Apps Script Web app URL (ends in /exec)
+//   INVITATION_WEBHOOK_SECRET  → the same value as SECRET in the script
 
 export const runtime = "nodejs"
 export const dynamic = "force-dynamic"
@@ -29,7 +25,6 @@ function limited(ip: string) {
 }
 
 const str = (v: unknown, max: number) => (typeof v === "string" ? v.trim().slice(0, max) : "")
-const esc = (s: string) => s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!)
 
 function fail(error: string, status: number) {
     return NextResponse.json({ ok: false, error }, { status })
@@ -96,73 +91,30 @@ export async function POST(req: Request) {
         referrer: attribution.referrer || "",
     }
 
-    const webhook = process.env.INVITATION_WEBHOOK_URL
-    const resendKey = process.env.RESEND_API_KEY
-    const deliveries: Promise<string>[] = []
-
-    if (webhook) {
-        deliveries.push(
-            fetch(webhook, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ ...submission, secret: process.env.INVITATION_WEBHOOK_SECRET || "" }),
-                signal: AbortSignal.timeout(15_000),
-            }).then(async (r) => {
-                const text = await r.text().catch(() => "")
-                // Google Apps Script answers 200 even on script errors, so it replies {"ok":true} on success
-                if (!r.ok || /"ok"\s*:\s*false/.test(text)) throw new Error(`webhook ${r.status}: ${text.slice(0, 200)}`)
-                return "webhook"
-            })
-        )
-    }
-
-    if (resendKey) {
-        const rows: [string, string][] = [
-            ["Event", submission.event],
-            ["Dates", dates],
-            ["Name", name],
-            ["Email", email],
-            ["Phone", phone],
-            ["Company", company],
-            ["Notes", notes],
-            ["Source", [submission.utm_source, submission.utm_medium, submission.utm_campaign].filter(Boolean).join(" / ") || (submission.fbclid ? "Meta (fbclid)" : "")],
-            ["Page", page],
-        ]
-        const filled = rows.filter(([, v]) => v)
-        deliveries.push(
-            fetch("https://api.resend.com/emails", {
-                method: "POST",
-                headers: { Authorization: `Bearer ${resendKey}`, "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    from: process.env.INVITATION_EMAIL_FROM || "Privé Website <invitations@theprive.network>",
-                    to: (process.env.INVITATION_EMAIL_TO || "info@theprive.network").split(",").map((s) => s.trim()),
-                    reply_to: email,
-                    subject: `Invitation request: ${name}, ${ev.speaker?.name || ev.title}`,
-                    text: filled.map(([k, v]) => `${k}: ${v}`).join("\n"),
-                    html: `<table cellpadding="6" style="font-family:Arial,sans-serif;font-size:14px;border-collapse:collapse">${filled
-                        .map(([k, v]) => `<tr><td style="color:#775E36;font-weight:bold;vertical-align:top">${esc(k)}</td><td style="white-space:pre-wrap">${esc(v)}</td></tr>`)
-                        .join("")}</table>`,
-                }),
-                signal: AbortSignal.timeout(15_000),
-            }).then(async (r) => {
-                if (!r.ok) throw new Error(`resend ${r.status}: ${(await r.text().catch(() => "")).slice(0, 200)}`)
-                return "email"
-            })
-        )
-    }
-
-    if (!deliveries.length) {
-        // Nothing configured yet: fine while developing, an error once live (so no request is silently lost)
+    const webhook = process.env.INVITATION_WEBHOOK_URL?.trim()
+    if (!webhook) {
+        // Not configured yet: fine while developing, an error once live (so no request is silently lost)
         if (process.env.NODE_ENV !== "production") {
-            console.info("[invitation] No destination configured. Submission:", submission)
+            console.info("[invitation] INVITATION_WEBHOOK_URL not set. Submission:", submission)
             return NextResponse.json({ ok: true })
         }
-        console.error("[invitation] INVITATION_WEBHOOK_URL / RESEND_API_KEY not set; request not delivered:", submission)
+        console.error("[invitation] INVITATION_WEBHOOK_URL not set; request not saved:", submission)
         return fail("We couldn’t send your request just now. Please email info@theprive.network and we’ll take it from there.", 503)
     }
 
-    const results = await Promise.allSettled(deliveries)
-    results.forEach((r) => r.status === "rejected" && console.error("[invitation] delivery failed:", r.reason))
-    if (results.some((r) => r.status === "fulfilled")) return NextResponse.json({ ok: true })
-    return fail("We couldn’t send your request just now. Please try again, or email info@theprive.network.", 502)
+    try {
+        const r = await fetch(webhook, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ ...submission, secret: (process.env.INVITATION_WEBHOOK_SECRET || "").trim() }),
+            signal: AbortSignal.timeout(25_000), // Apps Script can be slow to wake up
+        })
+        const text = await r.text().catch(() => "")
+        // Google Apps Script answers 200 even on script errors, so it replies {"ok":true} on success
+        if (!r.ok || /"ok"\s*:\s*false/.test(text)) throw new Error(`sheet ${r.status}: ${text.slice(0, 200)}`)
+        return NextResponse.json({ ok: true })
+    } catch (err) {
+        console.error("[invitation] saving to Google Sheet failed:", err)
+        return fail("We couldn’t send your request just now. Please try again, or email info@theprive.network.", 502)
+    }
 }

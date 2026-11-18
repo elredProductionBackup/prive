@@ -81,12 +81,11 @@ notes (optional); the request is recorded against that event, with no date picke
   `{ event: "invitation_request_submitted", practice_id, practice_name }` (no personal details)
 - Each request also carries the visitor's UTM tags / `fbclid` from the page they landed on, so it can be traced to its ad
 
-**Where submissions go** is set with environment variables on the host (see `.env.example`):
+**Where submissions go:** a Google Sheet, set with environment variables on the host (see `.env.example`):
 
-- `INVITATION_WEBHOOK_URL` + `INVITATION_WEBHOOK_SECRET`: posts each request as JSON. The ready-made
-  Google Apps Script in `scripts/invitation-sheet.gs` adds a row to a Google Sheet and emails info@theprive.network
-  (setup steps at the top of that file). Zapier, Make or a CRM webhook work the same way.
-- `RESEND_API_KEY` (+ `INVITATION_EMAIL_TO`, `INVITATION_EMAIL_FROM`): emails each request via Resend.
+- `INVITATION_WEBHOOK_URL` + `INVITATION_WEBHOOK_SECRET`: the Google Apps Script in `scripts/invitation-sheet.gs`
+  adds each request to an "All requests" tab, a tab per event and a per-event count on a "Summary" tab
+  (setup steps at the top of that file).
 
-With neither set, the form works in `npm run dev` (requests are printed in the terminal) but **refuses requests on the
+Without them, the form works in `npm run dev` (requests are printed in the terminal) but **refuses requests on the
 live site** and asks the visitor to email instead, so nothing is silently lost.
