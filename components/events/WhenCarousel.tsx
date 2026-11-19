@@ -33,7 +33,7 @@ function Media({ ev, isMobile }: { ev: PracticeEvent; isMobile: boolean }) {
         )
     return (
         <button type="button" onClick={() => setPlaying(true)} aria-label={`Play video: ${ev.speaker?.name || ev.title}`} style={{ ...resetButton, ...box, display: "block" }}>
-            {poster ? <FadeImg src={poster} alt={`${ev.speaker?.name || ev.title}, video introduction`} style={cover} /> : <video src={`${src}#t=0.1`} muted playsInline preload="metadata" style={cover} />}
+            {poster ? <FadeImg src={poster} alt={m.alt || `${ev.speaker?.name || ev.title}, video introduction`} style={cover} /> : <video src={`${src}#t=0.1`} muted playsInline preload="metadata" style={cover} />}
             <motion.span
                 whileHover={{ scale: 1.08 }}
                 style={{ position: "absolute", left: "50%", top: "50%", x: "-50%", y: "-50%", width: isMobile ? 42 : 52, height: isMobile ? 42 : 52, borderRadius: "50%", background: C.accent, opacity: 0.92, display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 6px 18px rgba(0,0,0,0.18)" }}

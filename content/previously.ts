@@ -8,6 +8,7 @@ export type Slide = {
     type: "image" | "video"
     title: string
     subtitle: string
+    alt?: string // photo description for Google
     gallery?: string[]
     video?: string
     cover?: string
@@ -18,6 +19,7 @@ export const SLIDES: Slide[] = [
     {
         type: "image",
         title: "Leadership Intelligence in an AI Era",
+        alt: "Oded Netzer leading the Leadership Intelligence in an AI Era session at Privé, July 2026",
         subtitle: "ODED NETZER SESSION",
         gallery: [
             `${CLD}/image/upload/v1790063127/IMG_8624_gpodbc.jpg`,
@@ -31,12 +33,14 @@ export const SLIDES: Slide[] = [
     {
         type: "image",
         title: "Negotiations, Influence, and Decision-making",
+        alt: "Niro Sivanathan leading the Negotiations, Influence, and Decision-making session at Privé, September 2026",
         subtitle: "NIRO SIVANATHAN SESSION",
         gallery: [`${CLD}/image/upload/v1790278531/IMG_0859_nythlx.jpg`],
     },
     {
         type: "image",
         title: "On-site Learnings at Zen Technologies",
+        alt: "Privé members on an on-site learning visit to Zen Technologies, Hyderabad, 2026",
         subtitle: "HYDERABAD 2026",
         gallery: [
             `${CLD}/image/upload/v1790246204/5cfeb8279256c280a42620b960177ff2ef6d2ce0_gbqv5m.png`,
@@ -48,6 +52,7 @@ export const SLIDES: Slide[] = [
     {
         type: "image",
         title: "On-site Learnings at Skyroot",
+        alt: "Privé members on an on-site learning visit to Skyroot, Hyderabad, 2026",
         subtitle: "HYDERABAD 2026",
         gallery: [
             `${CLD}/image/upload/v1790062639/skyroot-3_xnqn66.jpg`,
@@ -58,6 +63,7 @@ export const SLIDES: Slide[] = [
     {
         type: "image",
         title: "Alpha Room with Juniper",
+        alt: "Privé members at the Alpha Room with Juniper, on-site visit",
         subtitle: "ON-SITE VISIT",
         gallery: [`${CLD}/image/upload/v1790063006/Juniper_hiaw6b.jpg`],
     },

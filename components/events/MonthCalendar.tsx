@@ -99,7 +99,7 @@ function BlockContent({ ev, span, compact, mini, tight, cellW }: { ev: PracticeE
         const wrap: React.CSSProperties = { overflowWrap: "anywhere", hyphens: "auto", WebkitHyphens: "auto", minWidth: 0 } as React.CSSProperties
         return (
             <div style={{ marginTop: 4, minWidth: 0 }}>
-                {photo && <Avatar src={photo} name={ev.speaker?.name} size={tight ? 16 : 20} />}
+                {photo && <Avatar src={photo} name={ev.speaker?.name} alt={speakerAlt(ev)} size={tight ? 16 : 20} />}
                 <div style={{ ...wrap, marginTop: photo ? 4 : 0, fontSize: nameSize, fontWeight: 600, lineHeight: 1.15, letterSpacing: "-0.01em", color: C.text, ...(tight ? clamp(2) : {}) }}>{name}</div>
                 {sub && !tight && <div style={{ ...wrap, marginTop: 3, fontSize: 7.5, fontWeight: 500, lineHeight: 1.2, color: C.brown, ...clamp(3) }}>{sub}</div>}
             </div>
@@ -137,7 +137,7 @@ function BlockContent({ ev, span, compact, mini, tight, cellW }: { ev: PracticeE
     const longest = name.split(/\s+/).reduce((m, w) => Math.max(m, w.length), 1)
     const nameSize = mini ? 9 : Math.max(10, Math.min(compact ? 13 : 14, cellW / (longest * 0.7)))
     const roleSize = mini ? 8 : Math.max(10, Math.min(compact ? 11.5 : 12.5, cellW / 9))
-    const avatar = <Avatar src={ev.speaker?.photo} name={ev.speaker?.name} size={mini ? (tight ? 14 : 16) : tight ? 18 : compact ? 20 : 24} />
+    const avatar = <Avatar src={ev.speaker?.photo} name={ev.speaker?.name} alt={speakerAlt(ev)} size={mini ? (tight ? 14 : 16) : tight ? 18 : compact ? 20 : 24} />
     const nameEl = <div style={{ fontSize: nameSize, fontWeight: 500, lineHeight: 1.25, minWidth: 0, overflowWrap: "anywhere", ...(mini ? oneLine : clamp(tight ? 1 : 2)) }}>{name}</div>
     const roleEl = role ? <div style={{ fontSize: roleSize, fontWeight: 500, lineHeight: 1.3, color: C.brown, marginTop: mini ? 1 : 3, minWidth: 0, overflowWrap: "anywhere", ...clamp(mini ? 2 : 3) }}>{role}</div> : null
 
@@ -384,4 +384,9 @@ export default function MonthCalendar() {
             </AnimatePresence>
         </div>
     )
+}
+
+// Photo description for Google: "Name, Role" (the * footnote mark is dropped)
+function speakerAlt(ev: PracticeEvent) {
+    return [ev.speaker?.name, ev.speaker?.role?.replaceAll("*", "")].filter(Boolean).join(", ")
 }

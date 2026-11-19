@@ -216,7 +216,7 @@ export default function PreviouslyCarousel() {
                                         boxShadow: "0 18px 40px -18px rgba(0,0,0,0.45)",
                                     }}
                                 >
-                                    {cover && <img src={cover} alt={j < N ? `${s.title}, ${s.subtitle.toLowerCase()}` : ""} loading="lazy" decoding="async" draggable={false} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", pointerEvents: "none" }} />}
+                                    {cover && <img src={cover} alt={j < N ? s.alt || `${s.title}, ${s.subtitle.toLowerCase()}` : ""} loading="lazy" decoding="async" draggable={false} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", pointerEvents: "none" }} />}
                                     <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top,rgba(0,0,0,.8) 0%,rgba(0,0,0,.15) 42%,transparent 68%)" }} />
                                     <div style={{ position: "absolute", top: 12, left: 12, display: "flex", alignItems: "center", gap: 5, padding: "5px 9px", borderRadius: 6, background: "rgba(0,0,0,.45)", backdropFilter: "blur(6px)", color: "#fff", fontSize: 11, fontWeight: 600, letterSpacing: 0.4, fontFamily: "var(--sans)" }}>
                                         {isVideo ? <><PlayGlyph size={9} />{s.duration || "VIDEO"}</> : <><ImgGlyph />IMAGE</>}

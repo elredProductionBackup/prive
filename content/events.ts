@@ -40,7 +40,7 @@ export type PracticeEvent = {
     location?: string
     register?: boolean
     sticker?: { src: string; alt: string }
-    media?: { type: "image" | "video"; src: string; poster?: string }
+    media?: { type: "image" | "video"; src: string; poster?: string; alt?: string }
     hideViewDetails?: boolean
 
     speaker?: { name: string; photo?: string; role?: string; roleFull?: string; calRole?: string; linkedin?: string; tagline?: string }
@@ -332,7 +332,7 @@ export const EVENTS: PracticeEvent[] = [
         ],
         location: LOCATION,
         register: true,
-        media: { type: "video", src: `${CLD}/video/upload/v1793590416/WhatsApp_Video_2026-10-28_at_19.12.05_1_mpdru3.mp4`, poster: JONATHAN },
+        media: { type: "video", src: `${CLD}/video/upload/v1793590416/WhatsApp_Video_2026-10-28_at_19.12.05_1_mpdru3.mp4`, poster: JONATHAN, alt: "Jonathan Levav, Stanford Business School, video introduction to his Privé session" },
         speaker: {
             name: "Jonathan Levav",
             photo: JONATHAN,

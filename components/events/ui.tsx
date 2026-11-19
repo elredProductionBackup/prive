@@ -340,7 +340,7 @@ export function FadeImg({ src, alt = "", style, lazy }: { src: string; alt?: str
     )
 }
 
-export function Avatar({ src, name, size }: { src?: string; name?: string; size: number }) {
+export function Avatar({ src, name, alt, size }: { src?: string; name?: string; alt?: string; size: number }) {
     const url = cldImage(src || "", Math.round(size * 3))
     const initials = (name || "?")
         .replace(/^(prof|dr|mr|mrs|ms)\.?\s+/i, "")
@@ -366,7 +366,7 @@ export function Avatar({ src, name, size }: { src?: string; name?: string; size:
                 fontWeight: 600,
             }}
         >
-            {url ? <FadeImg src={url} alt={name} lazy style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} /> : initials}
+            {url ? <FadeImg src={url} alt={alt || name} lazy style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} /> : initials}
         </div>
     )
 }

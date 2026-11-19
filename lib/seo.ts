@@ -5,13 +5,13 @@ import type { Metadata } from "next"
 // If you set NEXT_PUBLIC_SITE_URL in production, it must also be https://www.theprive.network
 export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.theprive.network"
 export const SITE_NAME = "Privé"
-export const DEFAULT_DESCRIPTION = "A network designed to elevate good teams into great ones, with a single focus: to bring measurable change to your business."
+export const DEFAULT_DESCRIPTION = "An enterprise leadership development network that helps good teams become great ones, through year-round Practices led by leading professors, practitioners and industry experts."
 
 // Original PNG, served as-is (1200x630, ~160 KB, no transparency)
 export const DEFAULT_OG = "https://res.cloudinary.com/dtrv7p3gg/image/upload/v1794399734/OG-Prive_zivi7s.png"
 
 // Descriptive name so the brand isn't confused with the TV channel or luxury labels called Privé
-// export const HOME_TITLE = "Privé"
+// export const HOME_TITLE = "Leadership Development Program Mumbai | Privé Network"
 export const HOME_TITLE = "Leadership Development Program Mumbai | Privé Network"
 
 // Title, description, canonical URL, Open Graph and Twitter card for one page.
