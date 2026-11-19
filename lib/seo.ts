@@ -12,7 +12,7 @@ export const DEFAULT_OG = "https://res.cloudinary.com/dtrv7p3gg/image/upload/v17
 
 // Descriptive name so the brand isn't confused with the TV channel or luxury labels called Privé
 // export const HOME_TITLE = "Privé"
-export const HOME_TITLE = "Leadership Development Program Mumbai | Privé Network"
+export const HOME_TITLE = "Privé"
 
 // Title, description, canonical URL, Open Graph and Twitter card for one page.
 // `title` is the full title shown in Google and browser tabs (written out in full, no template).
