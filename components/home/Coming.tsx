@@ -9,7 +9,7 @@ export default function Coming() {
     return (
         <div className={s.root}>
             <section className={s.card} aria-labelledby="coming-title" style={{ "--bg": `url("${cld(COMING.image, 1400)}")` } as React.CSSProperties}>
-                <img src={cld(COMING.image, 1800)} alt="" aria-hidden loading="lazy" decoding="async" className={s.bg} />
+                <img src={cld(COMING.image, 1800)} alt={COMING.alt} loading="lazy" decoding="async" className={s.bg} />
                 <h2 id="coming-title" className={s.title}>
                     <span className={s.rule} aria-hidden />
                     {COMING.title}

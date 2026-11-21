@@ -11,7 +11,7 @@ import { EVENTS } from "@/content/events"
 export const runtime = "nodejs"
 export const dynamic = "force-dynamic"
 
-const MAX = { name: 120, email: 200, phone: 25, company: 160, notes: 2000, page: 500 }
+const MAX = { name: 120, email: 200, phone: 25, company: 300, notes: 2000, page: 500 }
 
 // Light per-instance limit so one visitor can't flood the inbox
 const hits = new Map<string, number[]>()
@@ -56,6 +56,7 @@ export async function POST(req: Request) {
     if (name.length < 2) return fail("Please enter your full name.", 400)
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return fail("Please enter a valid email address.", 400)
     if (!/^[+\d()\-.\s]+$/.test(phone) || digits.length < 8 || digits.length > 15) return fail("Please enter a valid phone number.", 400)
+    if (!company) return fail("Please enter your company website or LinkedIn link.", 400)
 
     const ev = EVENTS.find((e) => e.id === eventId)
     if (!ev) return fail("This event is no longer open for requests. Please refresh the page.", 400)

@@ -33,7 +33,7 @@ export default function AboutPage() {
         <>
             <main className={s.main}>
                 {/* 1. Hero: stays put while the page slides over it */}
-                <section className={s.hero} aria-labelledby="page-title">
+                <section className={s.hero} data-dark-hero="" aria-labelledby="page-title">
                     <Img src={hero.image} eager width={2000} className={s.fill} />
                     <div className="hero-overlay" aria-hidden />
                     <div className={s.heroCopy}>

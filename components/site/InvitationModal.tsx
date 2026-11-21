@@ -6,43 +6,16 @@ import Link from "next/link"
 import { AnimatePresence, motion } from "framer-motion"
 import { C, CloseIcon, F, Overlay, panelMotion, resetButton, roundBtn, useViewportWidth } from "@/components/events/ui"
 import { INVITATION_EVENT, type InvitationRequest, useScrollLock } from "@/lib/site"
+import { captureAttribution, readAttribution } from "@/lib/attribution"
 
 // "Request an invitation" form. Opened by every Register / I am Interested button
 // (requestInvitation() in components/events/ui). Submissions go to /api/invitation.
 // On success it pushes `invitation_request_submitted` to the GTM dataLayer, which is
 // how Tag Manager / Meta count each request.
 
-const ATTRIBUTION_KEY = "prive:attribution"
-const ATTRIBUTION_PARAMS = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "fbclid", "gclid"]
-
 type Fields = { name: string; email: string; phone: string; company: string; notes: string; website: string }
 type Errors = Partial<Record<keyof Fields, string>>
 const EMPTY: Fields = { name: "", email: "", phone: "", company: "", notes: "", website: "" }
-
-// Remembers which ad or campaign brought the visitor in (first landing in this tab),
-// so each request can be traced back to its ad.
-function captureAttribution() {
-    try {
-        if (sessionStorage.getItem(ATTRIBUTION_KEY)) return
-        const q = new URLSearchParams(window.location.search)
-        const found: Record<string, string> = {}
-        for (const k of ATTRIBUTION_PARAMS) {
-            const v = q.get(k)
-            if (v) found[k] = v.slice(0, 300)
-        }
-        found.landing_page = window.location.pathname + window.location.search
-        if (document.referrer && !document.referrer.startsWith(window.location.origin)) found.referrer = document.referrer.slice(0, 300)
-        sessionStorage.setItem(ATTRIBUTION_KEY, JSON.stringify(found))
-    } catch {}
-}
-
-function readAttribution(): Record<string, string> {
-    try {
-        return JSON.parse(sessionStorage.getItem(ATTRIBUTION_KEY) || "{}")
-    } catch {
-        return {}
-    }
-}
 
 function validate(f: Fields): Errors {
     const e: Errors = {}
@@ -50,6 +23,8 @@ function validate(f: Fields): Errors {
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(f.email.trim())) e.email = "Please enter a valid email address."
     const digits = f.phone.replace(/\D/g, "")
     if (!/^[+\d()\-.\s]+$/.test(f.phone.trim()) || digits.length < 8 || digits.length > 15) e.phone = "Please enter a valid phone number, with country code if outside India."
+    // Any text is accepted (a link, a company name, anything): it only can't be left empty
+    if (!f.company.trim()) e.company = "Please enter your company website or LinkedIn link."
     return e
 }
 
@@ -230,8 +205,10 @@ function Panel({ req, onClose }: { req: InvitationRequest; onClose: () => void }
                                 <Field id="inv-phone" label="Phone number" error={errors.phone}>
                                     <input id="inv-phone" className="inv-input" type="tel" inputMode="tel" autoComplete="tel" maxLength={25} placeholder="+91 98765 43210" value={f.phone} onChange={set("phone")} aria-invalid={!!errors.phone} aria-describedby={errors.phone ? "inv-phone-error" : undefined} />
                                 </Field>
-                                <Field id="inv-company" label="Company name" opt>
-                                    <input id="inv-company" className="inv-input" type="text" autoComplete="organization" maxLength={160} value={f.company} onChange={set("company")} />
+                                {/* Plain text on purpose: any website or LinkedIn link is accepted as typed, no format check.
+                                    Still sent as "company" (not "website", which is the spam trap below) so the sheet needs no change. */}
+                                <Field id="inv-company" label="Company website or LinkedIn" error={errors.company}>
+                                    <input id="inv-company" className="inv-input" type="text" inputMode="url" autoComplete="url" autoCapitalize="none" autoCorrect="off" spellCheck={false} maxLength={300} placeholder="yourcompany.com or LinkedIn link" value={f.company} onChange={set("company")} aria-invalid={!!errors.company} aria-describedby={errors.company ? "inv-company-error" : undefined} />
                                 </Field>
                                 <Field id="inv-notes" label="Notes" opt>
                                     <textarea id="inv-notes" className="inv-input" maxLength={2000} placeholder="Anything else you’d like us to know, such as your role or who else from your team may attend" value={f.notes} onChange={set("notes")} />

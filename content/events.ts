@@ -91,10 +91,10 @@ const CLD = "https://res.cloudinary.com/dtrv7p3gg"
 const LOCATION = "Tata Classroom - Taj Lands End, Mumbai"
 const BOARD = "Founders | Promoters | Family board | Senior Leadership"
 
-const SUNDER = `${CLD}/image/upload/v1792401857/463301abf06fbe65eedae48292208ac66fe0c1c5_vpz4n3.png`
-const JONATHAN = `${CLD}/image/upload/v1792401855/jonathan_pbrrun.jpg`
-const NAVIN = `${CLD}/image/upload/v1792401858/dd3dcedf2628fafad7c69a64cbaabcb6742903ee_joei3r.png`
-const DANNY = `${CLD}/image/upload/v1793085102/a05d599a1f99a63b30bc49c51d96f49c1326b83a_2_q8er7g.jpg`
+const SUNDER = `https://assets-pretest.elred.io/prive/website-images/prive-expert-sunder-ramachandran.png`
+const JONATHAN = `https://assets-pretest.elred.io/prive/website-images/prive-faculty-jonathan-levav-stanford.jpg`
+const NAVIN = `https://assets-pretest.elred.io/prive/website-images/prive-expert-navin-chander.png`
+const DANNY = `https://assets-pretest.elred.io/prive/website-images/prive-faculty-danny-warshay-brown.jpg`
 
 const JONATHAN_INTRO =
     "Innovation is at the core of both the survival and growth of any business. Despite its importance, incumbent firms struggle to innovate for various reasons, including mindset, culture, inadequate processes, limited resources, or lack of tools (or a combination thereof). In this seminar, I will lead a discussion on the need to innovate, where to look for market opportunities, how to set up a well-oiled innovation process in your organization, and how a simple set of tools can turn your organization into an innovation machine (all that remains is execution!)."
@@ -111,7 +111,7 @@ export const EVENTS: PracticeEvent[] = [
         location: LOCATION,
         speaker: {
             name: "Prof. Oded Netzer",
-            photo: `${CLD}/image/upload/v1792071101/oded_q1ccci.jpg`,
+            photo: `https://assets-pretest.elred.io/prive/website-images/prive-faculty-oded-netzer-columbia.jpg`,
             tagline: "Leadership Intelligence in an AI Era: Developing Quantitative Intuition",
         },
         popupTitle: "Columbia Business School",
@@ -163,7 +163,7 @@ export const EVENTS: PracticeEvent[] = [
         location: LOCATION,
         speaker: {
             name: "Niro Sivanathan",
-            photo: `${CLD}/image/upload/v1793594605/niro_qyec9q.png`,
+            photo: `https://assets-pretest.elred.io/prive/website-images/prive-faculty-niro-sivanathan-lbs.png`,
             tagline: "Negotiations, Influence, and Decision-making",
         },
         popupTitle: "London Business School*",

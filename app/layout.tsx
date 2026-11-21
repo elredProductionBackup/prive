@@ -6,7 +6,7 @@ import "./globals.css"
 import { mencken, menckenHead } from "./fonts"
 import { DEFAULT_DESCRIPTION, HOME_TITLE, ORG_LD, SITE_NAME, SITE_URL, pageMetadata } from "@/lib/seo"
 import Header from "@/components/site/Header"
-import HomeButton from "@/components/site/HomeButton"
+import ApplyButton from "@/components/site/ApplyButton"
 import Modals from "@/components/site/Modals"
 import SmoothScroll from "@/components/site/SmoothScroll"
 import Reveal from "@/components/site/Reveal"
@@ -39,6 +39,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('reveal-ready')" }} />
                 {/* Tells Google who Privé is (organisation, address, profiles), so it isn't mixed up with other "Privé" brands */}
                 <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ORG_LD) }} />
+                <link rel="preconnect" href="https://assets-pretest.elred.io" />
                 <link rel="preconnect" href="https://res.cloudinary.com" />
                 <link rel="preconnect" href="https://framerusercontent.com" />
             </head>
@@ -47,7 +48,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <SmoothScroll />
                 <Header />
                 {children}
-                <HomeButton />
+                <ApplyButton />
                 <Reveal />
                 <Modals />
                 <InvitationModal />

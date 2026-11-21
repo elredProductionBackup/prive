@@ -25,8 +25,8 @@ Qualification, FAQ and Operating Philosophy are popups.
 ## Scrolling and header
 
 - Lenis smooth scrolling runs site-wide (`components/site/SmoothScroll.tsx`), off for reduced-motion users.
-- The header scrolls away with the page, like the Framer site. To pin it, set `STICKY_HEADER = true` in `components/site/Header.tsx`.
-- The round HOME button (bottom right, every page) always leads to the homepage hero.
+- The header is pinned to the top. It is see-through over dark heroes and gets a light background once page content is under it. To let it scroll away again, set `STICKY_HEADER = false` in `components/site/Header.tsx`.
+- A floating "Apply for Membership" button (bottom right) is on every page except the form itself (`components/site/ApplyButton.tsx`).
 
 ## Editing content (no layout code needed)
 
@@ -85,7 +85,8 @@ notes (optional); the request is recorded against that event, with no date picke
 
 - `INVITATION_WEBHOOK_URL` + `INVITATION_WEBHOOK_SECRET`: the Google Apps Script in `scripts/invitation-sheet.gs`
   adds each request to an "All requests" tab, a tab per event and a per-event count on a "Summary" tab
-  (setup steps at the top of that file).
+  (setup steps at the top of that file). The Apply for Membership form (`/apply-for-membership`) uses the same
+  script and sheet, and goes to its own "Apply for Membership" tab with its own columns.
 
 Without them, the form works in `npm run dev` (requests are printed in the terminal) but **refuses requests on the
 live site** and asks the visitor to email instead, so nothing is silently lost.

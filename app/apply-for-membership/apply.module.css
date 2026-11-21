@@ -1,0 +1,155 @@
+/* Apply for Membership: copy and steps on the left, the form card on the right. Stacks on tablets and phones. */
+.main {
+    --brown: #7b5a33;
+    --card-line: #e5d3a6;
+    --underline: #cdc5ba;
+    --hint: #78736b;
+    --err: #a23b2a;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+}
+
+.wrap {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: clamp(124px, 12vw, 160px) clamp(20px, 4vw, 60px) clamp(72px, 8vw, 112px);
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
+    column-gap: clamp(40px, 6vw, 84px);
+    align-items: start;
+}
+
+/* ---- Left ---- */
+.title { margin: 0; font-family: var(--serif); font-weight: 400; font-size: clamp(42px, 4.4vw, 58px); line-height: 1.1; letter-spacing: -0.01em; color: var(--brown); }
+.title span { display: block; }
+.title em { display: block; font-family: var(--head); font-style: italic; }
+.intro { margin: clamp(24px, 2.6vw, 34px) 0 0; max-width: 23em; font-family: var(--serif); font-size: clamp(20px, 1.9vw, 26px); line-height: 1.45; }
+
+.steps { list-style: none; margin: clamp(48px, 6vw, 80px) 0 0; padding: 0; display: flex; flex-direction: column; gap: 26px; }
+.step { display: grid; grid-template-columns: 2.2ch 1fr; column-gap: 14px; }
+.stepNum { font-size: clamp(18px, 1.6vw, 21px); font-weight: 600; line-height: 1.35; color: var(--gold-deep); font-variant-numeric: tabular-nums; }
+.stepTitle { margin: 0; font-size: clamp(18px, 1.6vw, 21px); font-weight: 600; line-height: 1.35; color: #24221e; }
+.stepText { margin: 10px 0 0; max-width: 34em; font-size: clamp(16px, 1.35vw, 18px); line-height: 1.55; color: var(--muted); }
+
+/* ---- Form card ---- */
+.card {
+    border: 1px solid var(--card-line);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.4);
+    padding: clamp(30px, 3.2vw, 44px) clamp(20px, 2.4vw, 30px) clamp(30px, 3vw, 40px);
+}
+.cardTitle { margin: 0; text-align: center; font-family: var(--serif); font-weight: 400; font-size: clamp(32px, 3.2vw, 42px); line-height: 1.15; color: var(--brown); }
+.form { display: flex; flex-direction: column; margin-top: clamp(22px, 2.6vw, 34px); }
+
+.grid { display: grid; grid-template-columns: 1fr 1fr; column-gap: 30px; row-gap: 26px; }
+.wide { grid-column: 1 / -1; }
+
+/* Underlined field; the label sits where the text goes and moves up once there's a value */
+.field { position: relative; padding-top: 16px; min-width: 0; }
+.input {
+    display: block;
+    width: 100%;
+    height: 46px;
+    padding: 8px 0;
+    border: 0;
+    border-bottom: 1px solid var(--underline);
+    border-radius: 0;
+    background: transparent;
+    color: var(--ink);
+    font: inherit;
+    font-size: 17px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    appearance: none;
+    -webkit-appearance: none;
+}
+.input:focus { outline: none; border-bottom-color: var(--brown); box-shadow: 0 1px 0 var(--brown); }
+.input[aria-invalid="true"] { border-bottom-color: #c0563f; }
+.input:-webkit-autofill { -webkit-box-shadow: 0 0 0 40px var(--paper) inset; -webkit-text-fill-color: var(--ink); }
+
+.label {
+    position: absolute;
+    left: 0;
+    top: 28px;
+    max-width: 100%;
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 1.3;
+    color: var(--hint);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    pointer-events: none;
+    transform-origin: left top;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+.input:focus + .label,
+input.input:not(:placeholder-shown) + .label,
+.select[data-filled] + .label { transform: translateY(-26px) scale(0.8); color: var(--brown); font-weight: 400; }
+
+.select { padding: 14px 28px 2px 0; cursor: pointer; } /* value sits where typed text does in the other fields */
+.select:not([data-filled]) { color: transparent; }
+.select option { color: var(--ink); }
+.chevron { position: absolute; right: 2px; top: 33px; color: var(--gold-deep); pointer-events: none; }
+
+.error { display: block; margin-top: 7px; font-size: 13.5px; line-height: 1.4; color: var(--err); }
+
+.group { margin: 34px 0 0; padding: 0; border: 0; min-width: 0; }
+.groupLabel { padding: 0; font-size: 15px; font-weight: 600; line-height: 1.4; color: var(--muted); }
+.group .grid { margin-top: 2px; }
+
+.trap { position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden; }
+
+.alert { margin-top: 26px; padding: 12px 14px; border-radius: 10px; background: #fbefec; color: var(--err); font-size: 14.5px; line-height: 1.45; }
+
+.submit {
+    align-self: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    height: 52px;
+    margin-top: 38px;
+    padding: 0 30px;
+    border: 1.5px solid var(--brown);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--brown);
+    font-family: var(--sans);
+    font-size: 18px;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+.submit:hover { background: var(--brown); color: #fff; }
+.submit:disabled { cursor: progress; opacity: 0.85; }
+.submit:disabled:hover { background: transparent; color: var(--brown); }
+.spinner { width: 16px; height: 16px; border-radius: 50%; border: 2px solid rgba(123, 90, 51, 0.3); border-top-color: var(--brown); animation: spin 0.9s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.legal { margin: 14px 0 0; text-align: center; font-size: 13px; line-height: 1.5; color: var(--muted); }
+.legal a { color: var(--brown); text-underline-offset: 2px; }
+
+/* ---- Thank-you state ---- */
+.done { text-align: center; display: flex; flex-direction: column; align-items: center; }
+.doneIcon { width: 56px; height: 56px; margin-bottom: 18px; border-radius: 50%; background: #f3eee7; color: var(--gold-deep); display: flex; align-items: center; justify-content: center; }
+.doneText { margin: 12px auto 0; max-width: 40ch; font-size: 17px; line-height: 1.55; color: var(--muted); }
+
+/* ---- Tablet: stack, form under the copy ---- */
+@media (max-width: 900px) {
+    .wrap { grid-template-columns: 1fr; row-gap: 48px; }
+    .steps { margin-top: 40px; }
+}
+
+/* ---- Phone: one field per row ---- */
+@media (max-width: 560px) {
+    .wrap { padding-top: 108px; }
+    .grid { grid-template-columns: 1fr; row-gap: 18px; }
+    .card { border-radius: 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .label, .input, .submit { transition: none; }
+    .spinner { animation-duration: 2s; }
+}

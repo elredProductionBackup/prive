@@ -1,21 +1,29 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { AnimatePresence, motion } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { LOGO, NAV, PHILOSOPHY } from "@/content/site"
 import { NavLink, scrollToTop, useGoToCalendar, useScrollLock } from "@/lib/site"
+import { MEMBERSHIP_PATH } from "@/content/membership"
 
 // Popups without content yet are left out of the menu
 const MENU = NAV.filter((i) => i.action !== "modal:philosophy" || PHILOSOPHY.sections.length > 0)
 
 const EASE = [0.76, 0, 0.24, 1] as const
 
-// Like the Framer site, the header sits at the top and scrolls away with the page;
-// the round HOME button brings people back. Set to true to keep it pinned instead.
-const STICKY_HEADER = false
+// The header stays pinned to the top of the screen. It is see-through over a dark hero
+// (homepage, inner-page banners, contact) and gets a light background once the page
+// content scrolls under it. Set to false to let it scroll away with the page again.
+const STICKY_HEADER = true
+
+// Dark top sections the header floats over without a background
+const DARK_TOP = ".hero, .sub-hero, .nf, [data-dark-hero]"
+
+// Pages with no dark top section: light background from the start
+const SOLID_PATHS = [MEMBERSHIP_PATH]
 
 function CalendarIcon() {
     return (
@@ -28,6 +36,8 @@ function CalendarIcon() {
 
 export default function Header() {
     const [open, setOpen] = useState(false)
+    const [scrolled, setScrolled] = useState(false)
+    const headerRef = useRef<HTMLElement>(null)
 
     useScrollLock(open)
 
@@ -48,13 +58,40 @@ export default function Header() {
     // Close the menu after navigating to another page
     useEffect(() => setOpen(false), [pathname])
 
+    // Light background once the page content (not the dark hero) is under the header
+    useEffect(() => {
+        if (!STICKY_HEADER) return
+        let raf = 0
+        const check = () => {
+            raf = 0
+            const dark = document.querySelector<HTMLElement>(DARK_TOP)
+            const h = headerRef.current?.offsetHeight || 80
+            // These sections all start at the top of the page (the homepage hero is sticky,
+            // so its on-screen position never moves; its height is what counts)
+            const limit = dark ? dark.offsetHeight - h : 8
+            setScrolled(window.scrollY > Math.max(8, limit))
+        }
+        const onScroll = () => {
+            if (!raf) raf = requestAnimationFrame(check)
+        }
+        check()
+        window.addEventListener("scroll", onScroll, { passive: true })
+        window.addEventListener("resize", onScroll)
+        return () => {
+            cancelAnimationFrame(raf)
+            window.removeEventListener("scroll", onScroll)
+            window.removeEventListener("resize", onScroll)
+        }
+    }, [pathname])
+
     // The Calendar button (and its dark strip on phones) only appears on the homepage
     const showCalendar = pathname === "/"
-    const cls = ["site-header", STICKY_HEADER && "is-sticky", open && "is-open", !showCalendar && "no-cal"].filter(Boolean).join(" ")
+    const solid = STICKY_HEADER && (scrolled || SOLID_PATHS.includes(pathname))
+    const cls = ["site-header", STICKY_HEADER && "is-sticky", solid && "is-solid", open && "is-open", !showCalendar && "no-cal"].filter(Boolean).join(" ")
 
     return (
         <>
-            <header className={cls}>
+            <header ref={headerRef} className={cls}>
                 {showCalendar && (
                     <div className="cal-strip">
                         <button type="button" className="cal-pill" onClick={goCalendar}>

@@ -74,7 +74,7 @@ export default function ContactPage() {
     const c = CONTACT
     return (
         <>
-            <main className={s.main}>
+            <main className={s.main} data-dark-hero="">
                 <div className={s.glow} aria-hidden />
                 <div className={s.wrap}>
                     <section className={s.info} aria-labelledby="page-title">

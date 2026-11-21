@@ -22,7 +22,7 @@ export const SLIDES: Slide[] = [
         alt: "Oded Netzer leading the Leadership Intelligence in an AI Era session at Privé, July 2026",
         subtitle: "ODED NETZER SESSION",
         gallery: [
-            `${CLD}/image/upload/v1790063127/IMG_8624_gpodbc.jpg`,
+            `https://assets-pretest.elred.io/prive/website-images/prive-past-oded-netzer-session-jul-2026.jpg`,
             `${CLD}/image/upload/v1790063179/cx7nrz2sdteojh3oaeai_tfdu6y.webp`,
             `${CLD}/image/upload/v1790063185/koff7qlpasmdkjmxweof_yd7coc.webp`,
             `${CLD}/image/upload/v1786339153/ekz2vxs1fbo69ksaoshr_lijkz9.webp`,
@@ -35,7 +35,7 @@ export const SLIDES: Slide[] = [
         title: "Negotiations, Influence, and Decision-making",
         alt: "Niro Sivanathan leading the Negotiations, Influence, and Decision-making session at Privé, September 2026",
         subtitle: "NIRO SIVANATHAN SESSION",
-        gallery: [`${CLD}/image/upload/v1790278531/IMG_0859_nythlx.jpg`],
+        gallery: [`https://assets-pretest.elred.io/prive/website-images/prive-past-niro-sivanathan-session-sep-2026.jpg`],
     },
     {
         type: "image",
@@ -43,7 +43,7 @@ export const SLIDES: Slide[] = [
         alt: "Privé members on an on-site learning visit to Zen Technologies, Hyderabad, 2026",
         subtitle: "HYDERABAD 2026",
         gallery: [
-            `${CLD}/image/upload/v1790246204/5cfeb8279256c280a42620b960177ff2ef6d2ce0_gbqv5m.png`,
+            `https://assets-pretest.elred.io/prive/website-images/prive-past-zen-technologies-visit-hyderabad-2026.png`,
             `${CLD}/image/upload/v1790246201/b0bd724b6b05d144d7ce0787439888a41210f0ca_yan4q7.png`,
             `${CLD}/image/upload/v1790246196/cc36dd1d18cb2f17d65700bae8ebc7cd85a440a6_b4nmrt.png`,
             `${CLD}/image/upload/v1790246195/94b515bc3a61e73124aa3a2218a3dd4ea98a112f_nqhahx.png`,
@@ -55,7 +55,7 @@ export const SLIDES: Slide[] = [
         alt: "Privé members on an on-site learning visit to Skyroot, Hyderabad, 2026",
         subtitle: "HYDERABAD 2026",
         gallery: [
-            `${CLD}/image/upload/v1790062639/skyroot-3_xnqn66.jpg`,
+            `https://assets-pretest.elred.io/prive/website-images/prive-past-skyroot-visit-hyderabad-2026.jpg`,
             `${CLD}/image/upload/v1790246344/523d9f76d0bf1103064ab3708ca9e659e5ee3891_fesbhv.png`,
             `${CLD}/image/upload/v1790062639/skyroot-4_g6wyqa.jpg`,
         ],
@@ -65,6 +65,6 @@ export const SLIDES: Slide[] = [
         title: "Alpha Room with Juniper",
         alt: "Privé members at the Alpha Room with Juniper, on-site visit",
         subtitle: "ON-SITE VISIT",
-        gallery: [`${CLD}/image/upload/v1790063006/Juniper_hiaw6b.jpg`],
+        gallery: [`https://assets-pretest.elred.io/prive/website-images/prive-past-alpha-room-juniper.jpg`],
     },
 ]

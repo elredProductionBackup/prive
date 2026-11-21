@@ -2,7 +2,7 @@
 
 // One image for every screen size (it crops from the centre on phones)
 export const HERO = {
-    image: "https://res.cloudinary.com/dtrv7p3gg/image/upload/v1794213629/43168dd339358ec0fdb57435a65d36e45ff00e49_1_fil5hr.png",
+    image: "https://assets-pretest.elred.io/prive/website-images/prive-hero-climbers-roped-together.png",
     alt: "Four climbers roped together on a snowy ridge at sunrise, high above a sea of clouds",
     title: "No One Climbs Alone", // Mencken Std, shown in capitals
     sub: "every summit is reached as a team", // Mencken Std Head, italic
@@ -31,7 +31,8 @@ export const MEMBERSHIP_NOTE =
 // "Coming in 2027" box, shown under the membership note
 export const COMING = {
     title: "Coming in 2027",
-    image: "https://res.cloudinary.com/dtrv7p3gg/image/upload/v1794215120/a4f2e8c988ce6e537dcb517c6f7dbc998142da0c_1_wjqeas.png",
+    image: "https://assets-pretest.elred.io/prive/website-images/prive-coming-2027-members-session.png",
+    alt: "Privé members in a session in Mumbai", // photo description for Google: check it matches the photo
     items: [
         {
             title: "Privé Insights",
@@ -52,7 +53,7 @@ export const HUDDLE = {
     title: "Privé Huddle",
     kicker: "A curated group of max 15 peers meeting in structured sessions",
     text: "Closed-door thought rooms for serious dialogue among trusted peers, issue led discussions, cross-industry learning.",
-    icon: "/images/huddle-icon.svg",
+    icon: "/images/prive-icon-huddle.svg",
 }
 
 export const NOT_LIST = [

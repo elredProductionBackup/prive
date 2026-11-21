@@ -18,6 +18,7 @@ const nextConfig: NextConfig = {
     },
     images: {
         remotePatterns: [
+            { protocol: "https", hostname: "assets-pretest.elred.io" },
             { protocol: "https", hostname: "res.cloudinary.com" },
             { protocol: "https", hostname: "framerusercontent.com" },
         ],
